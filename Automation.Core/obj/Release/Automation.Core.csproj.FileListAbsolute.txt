@@ -1,0 +1,9 @@
+C:\Dev\repos\source\Automation.Runtime\Core\Automation.Core\obj\Release\Automation.Core.csprojResolveAssemblyReference.cache
+C:\Dev\repos\source\Automation.Runtime\Core\Automation.Core\obj\Release\Automation.Core.dll
+C:\Dev\repos\source\Automation.Runtime\Core\Automation.Core\obj\Release\Automation.Core.pdb
+C:\Dev\repos\release\Core\Automation.Core\Automation.Core.dll.config
+C:\Dev\repos\release\Core\Automation.Core\Automation.Core.dll
+C:\Dev\repos\release\Core\Automation.Core\Automation.Core.pdb
+C:\Dev\repos\source\Core\Automation.Core\obj\Release\Automation.Core.csprojResolveAssemblyReference.cache
+C:\Dev\repos\source\Core\Automation.Core\obj\Release\Automation.Core.dll
+C:\Dev\repos\source\Core\Automation.Core\obj\Release\Automation.Core.pdb

@@ -1,10 +1,8 @@
 ﻿using System;
-using Automation.Core.Plugins;
-using Automation.Extensions.UnitTesting;
+using Saturn72.Core.Plugins;
 using Xunit;
 
-
-namespace Automation.Core.Tests.Plugins
+namespace Saturn72.Core.Tests.Plugins
 {
     public class PluginManagerTests
     {

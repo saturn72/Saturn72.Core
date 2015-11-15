@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Automation.Core.Infrastructure;
+using Saturn72.Core.Infrastructure;
 
-namespace Automation.Core.Tests.Fakes
+namespace Saturn72.Core.Tests.Fakes
 {
     public class FakeTypeFinder : ITypeFinder
     {

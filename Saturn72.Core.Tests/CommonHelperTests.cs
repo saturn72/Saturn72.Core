@@ -1,7 +1,6 @@
-﻿using Automation.Extensions.UnitTesting;
-using Xunit;
+﻿using Xunit;
 
-namespace Automation.Core.Tests
+namespace Saturn72.Core.Tests
 {
     public class CommonHelperTests
     {

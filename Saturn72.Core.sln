@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Core", "Saturn72.Core\Saturn72.Core.csproj", "{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Core.Tests", "Saturn72.Core.Tests\Saturn72.Core.Tests.csproj", "{14ACAE65-A4F4-487A-99CD-81A02C2809AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,14 @@ Global
 		{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}.Release|x64.ActiveCfg = Release|x64
 		{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}.Release|x64.Build.0 = Release|x64
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Debug|x64.Build.0 = Debug|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Release|x64.ActiveCfg = Release|Any CPU
+		{14ACAE65-A4F4-487A-99CD-81A02C2809AE}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

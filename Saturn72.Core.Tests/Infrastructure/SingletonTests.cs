@@ -1,9 +1,8 @@
 ﻿using System;
-using Automation.Core.Infrastructure;
-using Automation.Extensions.UnitTesting;
+using Saturn72.Core.Infrastructure;
 using Xunit;
 
-namespace Automation.Core.Tests.Infrastructure
+namespace Saturn72.Core.Tests.Infrastructure
 {
     public class SingletonTests
     {

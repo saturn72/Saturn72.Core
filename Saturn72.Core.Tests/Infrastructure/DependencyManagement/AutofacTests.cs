@@ -3,8 +3,7 @@ using System.Linq;
 using Autofac;
 using Xunit;
 
-
-namespace Automation.Core.Tests.Infrastructure.DependencyManagement
+namespace Saturn72.Core.Tests.Infrastructure.DependencyManagement
 {
     public class AutofacTests
     {

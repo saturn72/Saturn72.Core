@@ -1,5 +1,6 @@
 ﻿using System;
 using Saturn72.Core.Infrastructure;
+using Saturn72.TestSdk.UnitTesting;
 using Xunit;
 
 namespace Saturn72.Core.Tests.Infrastructure
@@ -7,7 +8,6 @@ namespace Saturn72.Core.Tests.Infrastructure
     public class SingletonTests
     {
         [Fact]
-        [Trait("Category", "unit_test")]
         public void Singleton_IsNullByDefault()
         {
             var instance = Singleton<SingletonTests>.Instance;
@@ -15,7 +15,6 @@ namespace Saturn72.Core.Tests.Infrastructure
         }
 
         [Fact]
-        [Trait("Category", "unit_test")]
         public void Singletons_ShareSame_SingletonsDictionary()
         {
             Singleton<int>.Instance = 1;
@@ -27,7 +26,6 @@ namespace Saturn72.Core.Tests.Infrastructure
         }
 
         [Fact]
-        [Trait("Category", "unit_test")]
         public void SingletonDictionary_IsCreatedByDefault()
         {
             var instance = SingletonDictionary<SingletonTests, object>.Instance;
@@ -35,7 +33,6 @@ namespace Saturn72.Core.Tests.Infrastructure
         }
 
         [Fact]
-        [Trait("Category", "unit_test")]
         public void SingletonDictionary_CanStoreStuff()
         {
             var instance = SingletonDictionary<Type, SingletonTests>.Instance;
@@ -44,7 +41,6 @@ namespace Saturn72.Core.Tests.Infrastructure
         }
 
         [Fact]
-        [Trait("Category", "unit_test")]
         public void SingletonList_IsCreatedByDefault()
         {
             var instance = SingletonList<SingletonTests>.Instance;
@@ -52,7 +48,6 @@ namespace Saturn72.Core.Tests.Infrastructure
         }
 
         [Fact]
-        [Trait("Category", "unit_test")]
         public void SingletonList_CanStoreItems()
         {
             var instance = SingletonList<SingletonTests>.Instance;

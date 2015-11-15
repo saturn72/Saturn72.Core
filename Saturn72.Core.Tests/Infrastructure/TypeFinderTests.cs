@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using Saturn72.Core.Infrastructure;
+using Saturn72.TestSdk.UnitTesting;
 using Xunit;
 
 namespace Saturn72.Core.Tests.Infrastructure
 {
     public class TypeFinderTests
     {
-        [Fact]
-      [Trait("Category", "unit_test")]
+        [Fact]        
         public void TypeFinder_Benchmark_Findings()
         {
             var finder = new AppDomainTypeFinder();

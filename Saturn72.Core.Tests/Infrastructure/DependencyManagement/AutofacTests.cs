@@ -7,22 +7,6 @@ namespace Saturn72.Core.Tests.Infrastructure.DependencyManagement
 {
     public class AutofacTests
     {
-        public interface IFoo
-        {
-        }
-
-        public class Foo1 : IFoo
-        {
-        }
-
-        public class Foo2 : IFoo
-        {
-        }
-
-        public class Foo3 : IFoo
-        {
-        }
-
         [Fact(DisplayName = "Exercises a problem in a previous version, to make sure older Autofac.dll isn't picked up")
         ]
         public void EnumerablesFromDifferentLifetimeScopesShouldReturnDifferentCollections()
@@ -40,12 +24,28 @@ namespace Saturn72.Core.Tests.Infrastructure.DependencyManagement
             var arrayB = scopeB.Resolve<IEnumerable<IFoo>>().ToArray();
 
             Assert.Equal(2, arrayA.Count());
-            Assert.True(arrayA.Any(x => x.GetType() == typeof(Foo1)));
-            Assert.True(arrayA.Any(x => x.GetType() == typeof(Foo2)));
+            Assert.True(arrayA.Any(x => x.GetType() == typeof (Foo1)));
+            Assert.True(arrayA.Any(x => x.GetType() == typeof (Foo2)));
 
             Assert.Equal(2, arrayB.Count());
-            Assert.True(arrayB.Any(x => x.GetType() == typeof(Foo1)));
-            Assert.True(arrayB.Any(x => x.GetType() == typeof(Foo3)));
+            Assert.True(arrayB.Any(x => x.GetType() == typeof (Foo1)));
+            Assert.True(arrayB.Any(x => x.GetType() == typeof (Foo3)));
+        }
+
+        public interface IFoo
+        {
+        }
+
+        public class Foo1 : IFoo
+        {
+        }
+
+        public class Foo2 : IFoo
+        {
+        }
+
+        public class Foo3 : IFoo
+        {
         }
     }
 }

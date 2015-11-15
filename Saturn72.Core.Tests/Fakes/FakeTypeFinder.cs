@@ -8,23 +8,25 @@ namespace Saturn72.Core.Tests.Fakes
 {
     public class FakeTypeFinder : ITypeFinder
     {
-        public Assembly[] Assemblies { get; set; }
-        public Type[] Types { get; set; }
-
         public FakeTypeFinder(Assembly assembly, params Type[] types)
         {
-            Assemblies = new[] { assembly };
+            Assemblies = new[] {assembly};
             Types = types;
         }
+
         public FakeTypeFinder(params Type[] types)
         {
             Assemblies = new Assembly[0];
             Types = types;
         }
+
         public FakeTypeFinder(params Assembly[] assemblies)
         {
             Assemblies = assemblies;
         }
+
+        public Assembly[] Assemblies { get; set; }
+        public Type[] Types { get; set; }
 
         public IList<Assembly> GetAssemblies()
         {
@@ -32,42 +34,46 @@ namespace Saturn72.Core.Tests.Fakes
         }
 
 
-
         public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, bool onlyConcreteClasses = true)
         {
             return (from t in Types
-                    where !t.IsInterface && assignTypeFrom.IsAssignableFrom(t) && (!onlyConcreteClasses || (t.IsClass && !t.IsAbstract))
-                    select t).ToList();
+                where
+                    !t.IsInterface && assignTypeFrom.IsAssignableFrom(t) &&
+                    (!onlyConcreteClasses || (t.IsClass && !t.IsAbstract))
+                select t).ToList();
         }
 
         public IEnumerable<Type> FindClassesOfType<T>(bool onlyConcreteClasses = true)
         {
-            return FindClassesOfType(typeof(T), onlyConcreteClasses);
+            return FindClassesOfType(typeof (T), onlyConcreteClasses);
         }
 
-        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
+        public IEnumerable<Type> FindClassesOfType(Type assignTypeFrom, IEnumerable<Assembly> assemblies,
+            bool onlyConcreteClasses = true)
         {
             return FindClassesOfType(assignTypeFrom, onlyConcreteClasses);
         }
 
         public IEnumerable<Type> FindClassesOfType<T>(IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
         {
-            return FindClassesOfType(typeof(T), onlyConcreteClasses);
+            return FindClassesOfType(typeof (T), onlyConcreteClasses);
         }
 
-        public IEnumerable<Type> FindClassesOfAttribute<TAttribute>(bool onlyConcreteClasses = true) where TAttribute : Attribute
+        public IEnumerable<Type> FindClassesOfAttribute<TAttribute>(bool onlyConcreteClasses = true)
+            where TAttribute : Attribute
         {
-            return new Type[] { };
+            return new Type[] {};
         }
 
-        public IEnumerable<Type> FindClassesOfAttribute<TAttribute>(IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true) where TAttribute : Attribute
+        public IEnumerable<Type> FindClassesOfAttribute<TAttribute>(IEnumerable<Assembly> assemblies,
+            bool onlyConcreteClasses = true) where TAttribute : Attribute
         {
             return FindClassesOfAttribute<TAttribute>();
         }
 
         public IEnumerable<MethodInfo> FindMethodsOfReturnType<TReturnType>(bool onlyConcreteClasses = true)
         {
-            return FindMethodsOfReturnType(typeof(TReturnType), onlyConcreteClasses);
+            return FindMethodsOfReturnType(typeof (TReturnType), onlyConcreteClasses);
         }
 
         public IEnumerable<MethodInfo> FindMethodsOfReturnType(Type returnType, bool onlyConcreteClasses = true)
@@ -75,10 +81,10 @@ namespace Saturn72.Core.Tests.Fakes
             throw new NotImplementedException();
         }
 
-        public IEnumerable<MethodInfo> FindMethodsOfReturnType(Type returnType, IEnumerable<Assembly> assemblies, bool onlyConcreteClasses = true)
+        public IEnumerable<MethodInfo> FindMethodsOfReturnType(Type returnType, IEnumerable<Assembly> assemblies,
+            bool onlyConcreteClasses = true)
         {
             return FindMethodsOfReturnType(returnType, onlyConcreteClasses);
-
         }
 
         public IEnumerable<MethodInfo> FindMethodsOfAttribute<TAttribute>() where TAttribute : Attribute
@@ -86,7 +92,8 @@ namespace Saturn72.Core.Tests.Fakes
             throw new NotImplementedException();
         }
 
-        public IEnumerable<MethodInfo> FindMethodsOfAttribute<TAttribute>(IEnumerable<Assembly> assemblies) where TAttribute : Attribute
+        public IEnumerable<MethodInfo> FindMethodsOfAttribute<TAttribute>(IEnumerable<Assembly> assemblies)
+            where TAttribute : Attribute
         {
             throw new NotImplementedException();
         }

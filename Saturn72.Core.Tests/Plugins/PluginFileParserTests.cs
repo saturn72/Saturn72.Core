@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using Saturn72.Core.Plugins;
+using Saturn72.TestSdk.UnitTesting;
 using Xunit;
 
 namespace Saturn72.Core.Tests.Plugins
 {
     public class PluginFileParserTests
-
-
     {
         [Fact]
         public void ParseInstalledPluginsFile_ReturnsCorrectList()

@@ -7,8 +7,7 @@ namespace Saturn72.Core.Tests.Infrastructure.DependencyManagement
 {
     public class AutofacTests
     {
-        [Fact(DisplayName = "Exercises a problem in a previous version, to make sure older Autofac.dll isn't picked up")
-        ]
+        [Fact(DisplayName = "Exercises a problem in a previous version, to make sure older Autofac.dll isn't picked up")]
         public void EnumerablesFromDifferentLifetimeScopesShouldReturnDifferentCollections()
         {
             var rootBuilder = new ContainerBuilder();

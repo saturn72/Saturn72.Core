@@ -1,9 +1,0 @@
-C:\Dev\repos\source\Automation.Runtime\Core\Automation.Core.Services\obj\Release\Automation.Core.Services.csprojResolveAssemblyReference.cache
-C:\Dev\repos\source\Automation.Runtime\Core\Automation.Core.Services\obj\Release\Automation.Core.Services.dll
-C:\Dev\repos\source\Automation.Runtime\Core\Automation.Core.Services\obj\Release\Automation.Core.Services.pdb
-C:\Dev\repos\release\Core\Automation.Core.Services\Automation.Core.Services.dll.config
-C:\Dev\repos\release\Core\Automation.Core.Services\Automation.Core.Services.dll
-C:\Dev\repos\release\Core\Automation.Core.Services\Automation.Core.Services.pdb
-C:\Dev\repos\source\Core\Automation.Core.Services\obj\Release\Automation.Core.Services.csprojResolveAssemblyReference.cache
-C:\Dev\repos\source\Core\Automation.Core.Services\obj\Release\Automation.Core.Services.dll
-C:\Dev\repos\source\Core\Automation.Core.Services\obj\Release\Automation.Core.Services.pdb

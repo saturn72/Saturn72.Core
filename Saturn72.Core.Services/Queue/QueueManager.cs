@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Automation.Core.Data;
+using Saturn72.Core.Data;
 
-namespace Automation.Core.Services.Queue
+namespace Saturn72.Core.Services.Queue
 {
     public class QueueManager<TEntity> : IQueueManager<TEntity> where TEntity : BaseEntity
     {

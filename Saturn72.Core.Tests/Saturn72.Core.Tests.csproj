@@ -65,7 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutomationExceptionTests.cs" />
+    <Compile Include="Saturn72ExceptionTests.cs" />
     <Compile Include="CommonHelperTests.cs" />
     <Compile Include="Fakes\FakeTypeFinder.cs" />
     <Compile Include="Infrastructure\DependencyManagement\AutofacTests.cs" />

@@ -1,6 +1,6 @@
-﻿using Automation.Core.Infrastructure.Tasks;
+﻿using Saturn72.Core.Infrastructure.Tasks;
 
-namespace Automation.Core.Services.Tasks
+namespace Saturn72.Core.Services.Tasks
 {
     public interface IAutoAssignedScheduleTask
     {

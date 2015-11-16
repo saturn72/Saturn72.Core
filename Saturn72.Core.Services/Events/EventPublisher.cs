@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Automation.Core.Domain.Logging;
-using Automation.Core.Events;
-using Automation.Extensions;
+using Saturn72.Core.Domain.Logging;
+using Saturn72.Core.Events;
+using Saturn72.Extensions;
 
-namespace Automation.Core.Services.Events
+namespace Saturn72.Core.Services.Events
 {
     public class EventPublisher : IEventPublisher
     {

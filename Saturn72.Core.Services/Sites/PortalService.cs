@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Automation.Core.Domain.Sites;
+using Saturn72.Core.Domain.Sites;
 
-namespace Automation.Core.Services.Sites
+namespace Saturn72.Core.Services.Sites
 {
     public class PortalService : IProtalService
     {

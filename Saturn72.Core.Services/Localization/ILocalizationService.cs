@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Automation.Core.Caching;
-using Automation.Core.Data;
-using Automation.Core.Domain.Localization;
-using Automation.Core.Domain.Logging;
+using Saturn72.Core.Caching;
+using Saturn72.Core.Data;
+using Saturn72.Core.Domain.Localization;
+using Saturn72.Core.Domain.Logging;
 
-namespace Automation.Core.Services.Localization
+namespace Saturn72.Core.Services.Localization
 {
     public interface ILocalizationService
     {

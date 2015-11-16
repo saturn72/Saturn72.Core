@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web;
 using System.Web.Security;
-using Automation.Core.Domain.Users;
-using Automation.Core.Services.Users;
-using Automation.Extensions;
+using Saturn72.Core.Domain.Users;
+using Saturn72.Core.Services.Users;
+using Saturn72.Extensions;
 
-namespace Automation.Core.Services.Authentication
+namespace Saturn72.Core.Services.Authentication
 {
     public interface IAuthenticationService
     {
@@ -51,7 +51,7 @@ namespace Automation.Core.Services.Authentication
 
             var userEmail = ticket.UserData;
 
-            return userEmail.HaveValue()
+            return userEmail.HasValue()
                 ? _userService.GetUserByEmail(userEmail)
                 : null;
         }

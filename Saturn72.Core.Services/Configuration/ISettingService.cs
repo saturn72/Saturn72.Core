@@ -1,6 +1,6 @@
-﻿using Automation.Core.Configuration;
+﻿using Saturn72.Core.Configuration;
 
-namespace Automation.Core.Services.Configuration
+namespace Saturn72.Core.Services.Configuration
 {
     public interface ISettingService
     {

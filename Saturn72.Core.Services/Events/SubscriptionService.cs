@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Automation.Core.Events;
-using Automation.Core.Infrastructure;
+using Saturn72.Core.Events;
+using Saturn72.Core.Infrastructure;
 
-namespace Automation.Core.Services.Events
+namespace Saturn72.Core.Services.Events
 {
     public class SubscriptionService : ISubscriptionService
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Automation.Extensions;
+using Saturn72.Extensions;
 
-namespace Automation.Core.Services.Tasks
+namespace Saturn72.Core.Services.Tasks
 {
     public class TaskThread : IDisposable
     {

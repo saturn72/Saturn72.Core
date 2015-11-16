@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Automation.Core.Services.Queue
+namespace Saturn72.Core.Services.Queue
 {
     public interface IQueueManager<TEntity> where TEntity : BaseEntity
     {

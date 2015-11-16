@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Automation.Core.Domain.Common;
+using Saturn72.Core.Domain.Common;
 
-namespace Automation.Core.Services.Common
+namespace Saturn72.Core.Services.Common
 {
     public interface IGenericAttributeService
     {  /// <summary>

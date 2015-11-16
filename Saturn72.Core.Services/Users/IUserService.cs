@@ -1,7 +1,7 @@
 ﻿using System;
-using Automation.Core.Domain.Users;
+using Saturn72.Core.Domain.Users;
 
-namespace Automation.Core.Services.Users
+namespace Saturn72.Core.Services.Users
 {
     public interface IUserService
     {

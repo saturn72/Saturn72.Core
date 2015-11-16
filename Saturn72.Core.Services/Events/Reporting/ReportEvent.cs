@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-using Automation.Core.Events;
+using Saturn72.Core.Events;
 
-namespace Automation.Core.Services.Events.Reporting
+namespace Saturn72.Core.Services.Events.Reporting
 {
     public class ReportEventMessage : EventBase
     {

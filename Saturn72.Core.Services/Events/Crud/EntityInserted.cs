@@ -1,4 +1,4 @@
-﻿namespace Automation.Core.Services.Events
+﻿namespace Saturn72.Core.Services.Events
 {
     /// <summary>
     /// A container for entities that have been inserted.

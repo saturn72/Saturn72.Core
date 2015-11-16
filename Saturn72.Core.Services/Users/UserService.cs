@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
-using Automation.Core.Caching;
-using Automation.Core.Data;
-using Automation.Core.Domain.Users;
-using Automation.Core.Events;
-using Automation.Core.Services.Events;
+using Saturn72.Core.Caching;
+using Saturn72.Core.Data;
+using Saturn72.Core.Domain.Users;
+using Saturn72.Core.Events;
+using Saturn72.Core.Services.Events;
 
-namespace Automation.Core.Services.Users
+namespace Saturn72.Core.Services.Users
 {
     public class UserService : IUserService
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Automation.Core.Domain.Tasks;
+using Saturn72.Core.Domain.Tasks;
 
-namespace Automation.Core.Services.Tasks
+namespace Saturn72.Core.Services.Tasks
 {
     public interface IScheduleTaskService
     {

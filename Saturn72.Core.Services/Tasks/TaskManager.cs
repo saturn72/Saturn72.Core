@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Automation.Core.Domain.Tasks;
-using Automation.Core.Infrastructure;
-using Automation.Extensions;
+using Saturn72.Core.Domain.Tasks;
+using Saturn72.Core.Infrastructure;
+using Saturn72.Extensions;
 
-namespace Automation.Core.Services.Tasks
+namespace Saturn72.Core.Services.Tasks
 {
     public class TaskManager
     {
@@ -88,7 +88,7 @@ namespace Automation.Core.Services.Tasks
                 var autoAssignedTask = Activator.CreateInstance(at) as IAutoAssignedScheduleTask;
                 Guard.NotEmpty(autoAssignedTask.Name, "autoAssignedTask.Name");
 
-                if (scheduleTasks.Any(t => t.Name.EqualsToIgnoreCases(autoAssignedTask.Name)))
+                if (scheduleTasks.Any(t => t.Name.EqualsTo(autoAssignedTask.Name)))
                     return;
                 var taskType = autoAssignedTask.Task.GetType();
                 taskService.InsertTask(new ScheduleTask

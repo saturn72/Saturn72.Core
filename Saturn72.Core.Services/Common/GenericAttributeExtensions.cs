@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using Automation.Core.Data;
-using Automation.Core.Infrastructure;
-using Automation.Extensions;
+using Saturn72.Core.Data;
+using Saturn72.Core.Infrastructure;
+using Saturn72.Extensions;
 
-namespace Automation.Core.Services.Common
+namespace Saturn72.Core.Services.Common
 {
     public static class GenericAttributeExtensions
     {

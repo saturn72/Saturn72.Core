@@ -1,6 +1,6 @@
-﻿using Automation.Core.Events;
+﻿using Saturn72.Core.Events;
 
-namespace Automation.Core.Services.Events
+namespace Saturn72.Core.Services.Events
 {
     public interface IConsumer<TEventMessage> where TEventMessage : EventBase
     {

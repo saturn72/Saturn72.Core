@@ -1,12 +1,12 @@
 using System;
 using Autofac;
-using Automation.Core.Domain.Logging;
-using Automation.Core.Domain.Tasks;
-using Automation.Core.Infrastructure;
-using Automation.Core.Infrastructure.Tasks;
-using Automation.Extensions;
+using Saturn72.Core.Domain.Logging;
+using Saturn72.Core.Domain.Tasks;
+using Saturn72.Core.Infrastructure;
+using Saturn72.Core.Infrastructure.Tasks;
+using Saturn72.Extensions;
 
-namespace Automation.Core.Services.Tasks
+namespace Saturn72.Core.Services.Tasks
 {
     public class Task
     {

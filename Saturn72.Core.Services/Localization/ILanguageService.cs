@@ -1,4 +1,4 @@
-﻿namespace Automation.Core.Services.Localization
+﻿namespace Saturn72.Core.Services.Localization
 {
 public     interface ILanguageService
     {

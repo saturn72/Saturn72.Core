@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Automation.Core.Caching;
-using Automation.Core.Configuration;
-using Automation.Core.Data;
-using Automation.Core.Data.Configuration;
+using Saturn72.Core.Caching;
+using Saturn72.Core.Configuration;
+using Saturn72.Core.Data;
+using Saturn72.Core.Data.Configuration;
 
-namespace Automation.Core.Services.Configuration
+namespace Saturn72.Core.Services.Configuration
 {
     public class SettingService : ISettingService
     {

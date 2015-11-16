@@ -1,27 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Automation.Core.Data;
-using Automation.Core.Domain.Common;
-using Automation.Core.Domain.ExecutionNodes;
-using Automation.Core.Domain.Logging;
-using Automation.Core.Domain.Users;
+using Saturn72.Core.Data;
+using Saturn72.Core.Domain.Common;
+using Saturn72.Core.Domain.Logging;
+using Saturn72.Core.Domain.Users;
 
-namespace Automation.Core.Services.Logging
+namespace Saturn72.Core.Services.Logging
 {
     public class DatabaseLogger : ILogger
     {
-        #region Fields
-
-        private readonly IRepository<Log> _logRepository;
-        private readonly CommonSettings _commonSettings;
-
-        #endregion
-
         #region Ctor
 
         /// <summary>
-        /// Ctor
+        ///     Ctor
         /// </summary>
         /// <param name="logRepository">Log repository</param>
         /// <param name="commonSettings">Common settings</param>
@@ -36,7 +28,7 @@ namespace Automation.Core.Services.Logging
         #region Utitilities
 
         /// <summary>
-        /// Gets a value indicating whether this message should not be logged
+        ///     Gets a value indicating whether this message should not be logged
         /// </summary>
         /// <param name="message">TextMessage</param>
         /// <returns>ActualValue</returns>
@@ -45,7 +37,7 @@ namespace Automation.Core.Services.Logging
             if (_commonSettings.IgnoreLogWordlist.Count == 0)
                 return false;
 
-            if (String.IsNullOrWhiteSpace(message))
+            if (string.IsNullOrWhiteSpace(message))
                 return false;
 
             return _commonSettings
@@ -55,10 +47,17 @@ namespace Automation.Core.Services.Logging
 
         #endregion
 
+        #region Fields
+
+        private readonly IRepository<Log> _logRepository;
+        private readonly CommonSettings _commonSettings;
+
+        #endregion
+
         #region Methods
 
         /// <summary>
-        /// Determines whether a log level is enabled
+        ///     Determines whether a log level is enabled
         /// </summary>
         /// <param name="level">Log level</param>
         /// <returns>ActualValue</returns>
@@ -74,7 +73,7 @@ namespace Automation.Core.Services.Logging
         }
 
         /// <summary>
-        /// Deletes a log item
+        ///     Deletes a log item
         /// </summary>
         /// <param name="log">Log item</param>
         public virtual void DeleteLog(Log log)
@@ -86,7 +85,7 @@ namespace Automation.Core.Services.Logging
         }
 
         /// <summary>
-        /// Gets all log items
+        ///     Gets all log items
         /// </summary>
         /// <param name="fromUtc">Log item creation from; null to load all records</param>
         /// <param name="toUtc">Log item creation to; null to load all records</param>
@@ -106,7 +105,7 @@ namespace Automation.Core.Services.Logging
                 query = query.Where(l => toUtc.Value >= l.CreatedOnUtc);
             if (logLevel.HasValue)
             {
-                var logLevelId = (int)logLevel.Value;
+                var logLevelId = (int) logLevel.Value;
                 query = query.Where(l => logLevelId == l.LogLevelId);
             }
             if (!string.IsNullOrEmpty(message))
@@ -117,7 +116,7 @@ namespace Automation.Core.Services.Logging
         }
 
         /// <summary>
-        /// Gets a log item
+        ///     Gets a log item
         /// </summary>
         /// <param name="logId">Log item identifier</param>
         /// <returns>Log item</returns>
@@ -130,7 +129,7 @@ namespace Automation.Core.Services.Logging
         }
 
         /// <summary>
-        /// Get log items by identifiers
+        ///     Get log items by identifiers
         /// </summary>
         /// <param name="logIds">Log item identifiers</param>
         /// <returns>Log items</returns>
@@ -140,8 +139,8 @@ namespace Automation.Core.Services.Logging
                 return new List<Log>();
 
             var query = from l in _logRepository.Table
-                        where logIds.Contains(l.Id)
-                        select l;
+                where logIds.Contains(l.Id)
+                select l;
             var logItems = query.ToList();
             //sort by passed identifiers
             var sortedLogItems = new List<Log>();
@@ -155,7 +154,7 @@ namespace Automation.Core.Services.Logging
         }
 
         /// <summary>
-        /// Inserts a log item
+        ///     Inserts a log item
         /// </summary>
         /// <param name="logLevel">Log level</param>
         /// <param name="shortMessage">The short message</param>
@@ -163,7 +162,7 @@ namespace Automation.Core.Services.Logging
         /// <param name="user"></param>
         /// <param name="executionNode">The executionNode to associate log record with</param>
         /// <returns>A log item</returns>
-        public virtual Log InsertLog(LogLevel logLevel, string shortMessage, string fullMessage = "", User user=null, ExecutionNode executionNode = null)
+        public virtual Log InsertLog(LogLevel logLevel, string shortMessage, string fullMessage = "", User user = null)
         {
             //check ignore word/phrase list?
             if (IgnoreLog(shortMessage) || IgnoreLog(fullMessage))
@@ -174,7 +173,6 @@ namespace Automation.Core.Services.Logging
                 LogLevel = logLevel,
                 ShortMessage = shortMessage,
                 FullMessage = fullMessage,
-                ExecutionNode = executionNode,
                 CreatedOnUtc = DateTime.UtcNow
             };
 

@@ -5,32 +5,23 @@ using System.Reflection;
 using Autofac;
 using Autofac.Builder;
 using Autofac.Core;
-using Automation.Core.Configuration;
-using Automation.Core.Data;
-using Automation.Core.Events;
-using Automation.Core.Infrastructure;
-using Automation.Core.Infrastructure.DependencyManagement;
-using Automation.Core.Services.Activity;
-using Automation.Core.Services.Aspects;
-using Automation.Core.Services.Configuration;
-using Automation.Core.Services.Events;
-using Automation.Core.Services.Execution;
-using Automation.Core.Services.Jobs;
-using Automation.Core.Services.Queue;
-using Automation.Core.Services.Reporting;
-using Automation.Core.Services.Sites;
-using Automation.Core.Services.Tasks;
-using Automation.Core.Services.Users;
-using Castle.DynamicProxy;
+using Saturn72.Core.Configuration;
+using Saturn72.Core.Data;
+using Saturn72.Core.Events;
+using Saturn72.Core.Infrastructure;
+using Saturn72.Core.Infrastructure.DependencyManagement;
+using Saturn72.Core.Services.Configuration;
+using Saturn72.Core.Services.Events;
+using Saturn72.Core.Services.Queue;
+using Saturn72.Core.Services.Sites;
+using Saturn72.Core.Services.Tasks;
+using Saturn72.Core.Services.Users;
 
-namespace Automation.Core.Services
+namespace Saturn72.Core.Services
 {
     public class DependencyRegistrar : IDependencyRegistrar
     {
-        public int Order
-        {
-            get { return 10; }
-        }
+        public int Order => 10;
 
         public void Register(ContainerBuilder builder, ITypeFinder typeFinder)
         {
@@ -39,27 +30,10 @@ namespace Automation.Core.Services
             //settings
             builder.RegisterSource(new SettingsSource());
 
-            //report
-            builder.RegisterType<Reporter>().As<IReporter>().SingleInstance();
-            //Aspects
-            builder.RegisterType<RuntimeInterceptor>().As<IRuntimeInterceptor>().SingleInstance()
-                .Named<IInterceptor>(RuntimeInterceptor.InterceptionKey);
-
             //Services
             builder.RegisterType<SettingService>().As<ISettingService>().InstancePerLifetimeScope();
-            builder.RegisterType<ActivityExecutionService>().As<IActivityExecutionService>().InstancePerLifetimeScope();
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             builder.RegisterType<PortalService>().As<IProtalService>().InstancePerLifetimeScope();
-
-            builder.RegisterType<AutomationJobService>().As<IAutomationJobService>().InstancePerLifetimeScope();
-            builder.RegisterType<AutomationJobPlanService>().As<IAutomationJobPlanService>().InstancePerLifetimeScope();
-            builder.RegisterType<TestCaseExecutionDataService>().As<ITestCaseExecutionDataService>().InstancePerLifetimeScope();
-            builder.RegisterType<ExecutionService>().As<IExecutionService>().InstancePerLifetimeScope();
-
-            builder.RegisterType<ExecutionQueueManager>().As<IExecutionQueueManager>()
-                .SingleInstance();
-            builder.RegisterType<TestExecutor>().As<ITestExecutor>().InstancePerLifetimeScope();
-
             builder.RegisterType<ScheduleTaskService>().As<IScheduleTaskService>().InstancePerLifetimeScope();
 
 

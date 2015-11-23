@@ -111,7 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Saturn72.Core\Saturn72.Core.csproj">
-      <Project>{c44eb924-2ba3-46ed-90bd-3d6fd25eafd4}</Project>
+      <Project>{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}</Project>
       <Name>Saturn72.Core</Name>
     </ProjectReference>
   </ItemGroup>

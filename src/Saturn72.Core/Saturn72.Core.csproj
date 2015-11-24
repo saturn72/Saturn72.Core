@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Saturn72.Core</RootNamespace>
+    <AssemblyName>Saturn72.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>8fa293a0</NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\release\Core\Automation.Core\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi.3.1.0\lib\net40\Autofac.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Saturn72.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Saturn72.Extensions.1.0.0-CI00007\lib\net452\Saturn72.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Saturn72.Extensions.AspNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Saturn72.Extensions.AspNet.1.0.0-CI00007\lib\net452\Saturn72.Extensions.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\SettingsBase.cs" />
+    <Compile Include="Data\BaseDataProvider.cs" />
+    <Compile Include="Data\BaseDataProviderManager.cs" />
+    <Compile Include="Data\DataSettings.cs" />
+    <Compile Include="Configuration\SettingsLoader.cs" />
+    <Compile Include="Data\IDataCollection.cs" />
+    <Compile Include="Data\ListDataCollection.cs" />
+    <Compile Include="Data\QueueDataCollection.cs" />
+    <Compile Include="Domain\Common\GenericAttribute.cs" />
+    <Compile Include="Domain\Localization\LocaleStringResource.cs" />
+    <Compile Include="Domain\Localization\LocalizationSettings.cs" />
+    <Compile Include="Domain\Sites\Portal.cs" />
+    <Compile Include="Domain\Tasks\ScheduleTask.cs" />
+    <Compile Include="Domain\Users\SystemUserAttributeNames.cs" />
+    <Compile Include="Domain\Users\SystemUserRoleNames.cs" />
+    <Compile Include="Domain\Users\User.cs" />
+    <Compile Include="Domain\Users\UserExtensions.cs" />
+    <Compile Include="Domain\Users\UserRole.cs" />
+    <Compile Include="Domain\Users\UserSettings.cs" />
+    <Compile Include="Events\EventBase.cs" />
+    <Compile Include="Events\IEventPublisher.cs" />
+    <Compile Include="IPortalContext.cs" />
+    <Compile Include="IWebHelper.cs" />
+    <Compile Include="IWorkContext.cs" />
+    <Compile Include="Net\HttpClientBase.cs" />
+    <Compile Include="Net\Rest\CommonRestClient.cs" />
+    <Compile Include="Net\Rest\IRestClient.cs" />
+    <Compile Include="Net\Rest\Method.cs" />
+    <Compile Include="Net\Rest\RestClientExtensions.cs" />
+    <Compile Include="Net\Rest\RestResponse.cs" />
+    <Compile Include="Net\WcfClientBase.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Caching\CacheExtensions.cs" />
+    <Compile Include="Caching\ICacheManager.cs" />
+    <Compile Include="Caching\MemeoryCacheManager.cs" />
+    <Compile Include="CommonHelper.cs" />
+    <Compile Include="ComponentModel\GenericListTypeConverter.cs" />
+    <Compile Include="ComponentModel\WriteLockDisposable.cs" />
+    <Compile Include="Configuration\ISettings.cs" />
+    <Compile Include="Data\Configuration\Setting.cs" />
+    <Compile Include="Data\IDbContext.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\RepositoryExtensions.cs" />
+    <Compile Include="Domain\Common\CommonSettings.cs" />
+    <Compile Include="Domain\Common\FulltextSearchMode.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Domain\Logging\LogRecord.cs" />
+    <Compile Include="Logging\LoggerExtensions.cs" />
+    <Compile Include="Domain\Logging\LogLevel.cs" />
+    <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
+    <Compile Include="Plugins\BasePlugin.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="Plugins\PluginSettings.cs" />
+    <Compile Include="Infrastructure\DependencyManagement\ContainerManager.cs" />
+    <Compile Include="Infrastructure\DependencyManagement\IDependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\Engine.cs" />
+    <Compile Include="Infrastructure\IEngine.cs" />
+    <Compile Include="Infrastructure\EngineContext.cs" />
+    <Compile Include="Infrastructure\ITypeFinder.cs" />
+    <Compile Include="Infrastructure\Singleton.cs" />
+    <Compile Include="Infrastructure\WebAppTypeFinder.cs" />
+    <Compile Include="IPagedList.cs" />
+    <Compile Include="Saturn72Exception.cs" />
+    <Compile Include="PagedList.cs" />
+    <Compile Include="Saturn72ServerVersion.cs" />
+    <Compile Include="Plugins\IInstallablePlugin.cs" />
+    <Compile Include="Plugins\PluginDescriptor.cs" />
+    <Compile Include="Plugins\PluginFileParser.cs" />
+    <Compile Include="Plugins\PluginManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\DependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\Tasks\IDisposeTask.cs" />
+    <Compile Include="Infrastructure\Tasks\IStartupTask.cs" />
+    <Compile Include="Infrastructure\Tasks\ITask.cs" />
+    <Compile Include="WebHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -10,8 +10,10 @@ using Saturn72.Core.Data;
 using Saturn72.Core.Events;
 using Saturn72.Core.Infrastructure;
 using Saturn72.Core.Infrastructure.DependencyManagement;
+using Saturn72.Core.Logging;
 using Saturn72.Core.Services.Configuration;
 using Saturn72.Core.Services.Events;
+using Saturn72.Core.Services.Logging;
 using Saturn72.Core.Services.Queue;
 using Saturn72.Core.Services.Sites;
 using Saturn72.Core.Services.Tasks;
@@ -61,6 +63,10 @@ namespace Saturn72.Core.Services
             builder.RegisterType<EventPublisher>().As<IEventPublisher>().SingleInstance();
             builder.RegisterType<SubscriptionService>().As<ISubscriptionService>().SingleInstance();
             builder.RegisterGeneric(typeof (QueueManager<>)).As(typeof (IQueueManager<>)).SingleInstance();
+
+            //Core services Logging
+            builder.RegisterType<DbLogger>().As<ILogger>().SingleInstance();
+            builder.RegisterType<DbLogRecordService>().As<ILogRecordService>().InstancePerLifetimeScope();
         }
     }
 

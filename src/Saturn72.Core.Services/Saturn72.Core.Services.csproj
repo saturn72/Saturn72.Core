@@ -53,11 +53,6 @@
       <HintPath>..\..\..\Automation.ThirdParty\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Automation.ThirdParty\Castle.Core.3.2.2\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Saturn72.Extensions">
       <HintPath>..\packages\Saturn72.Extensions.1.0.0-CI00007\lib\net452\Saturn72.Extensions.dll</HintPath>
     </Reference>

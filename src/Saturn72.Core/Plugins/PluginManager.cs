@@ -24,14 +24,8 @@ namespace Saturn72.Core.Plugins
 
         private static string _installedPluginsFilePath;
 
-        private static string InstalledPluginsFilePath
-        {
-            get
-            {
-                return _installedPluginsFilePath ??
-                       (_installedPluginsFilePath = BuildInstalledPluginFilePath());
-            }
-        }
+        private static string InstalledPluginsFilePath => _installedPluginsFilePath ??
+                                                          (_installedPluginsFilePath = BuildInstalledPluginFilePath());
 
         private static string BuildInstalledPluginFilePath()
         {
@@ -44,7 +38,7 @@ namespace Saturn72.Core.Plugins
         #region Fields
 
         private static readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim();
-        private static string _shadowCopyFolder;
+        private static DirectoryInfo _shadowCopyFolder;
 
         #endregion
 
@@ -70,8 +64,8 @@ namespace Saturn72.Core.Plugins
             {
                 // TODO: Add verbose exception handling / raising here since this is happening on app startup and could
                 // prevent app from starting altogether
-                _shadowCopyFolder = pluginsSettings.ShadowCopyFolder;
-                if (!Directory.Exists(_shadowCopyFolder))
+                _shadowCopyFolder = new DirectoryInfo(pluginsSettings.ShadowCopyFolder);
+                if (!_shadowCopyFolder.Exists)
                     Trace.WriteLine("Could not find plugins folder in path: " + _shadowCopyFolder);
 
                 var referencedPlugins = new List<PluginDescriptor>();
@@ -90,10 +84,10 @@ namespace Saturn72.Core.Plugins
                     Debug.WriteLine(
                         "Creating shadow copy folder (if not already exists) and querying for dlls. Folder path: " +
                         _shadowCopyFolder);
-                    Directory.CreateDirectory(_shadowCopyFolder);
+                    _shadowCopyFolder.Create();
 
                     //get list of all files in bin
-                    var binFiles = IoHelper.GetDirectoryInfo(_shadowCopyFolder)
+                    var binFiles = _shadowCopyFolder
                         .GetFiles("*", SearchOption.AllDirectories);
                     if (pluginsSettings.ClearShadowDirectoryOnStartup)
                     {
@@ -358,22 +352,114 @@ namespace Saturn72.Core.Plugins
         private static Assembly PerformFileDeploy(FileInfo plugin)
         {
             VerifyNotNullPlugin(plugin);
-
-            var isWebApp = CommonHelper.IsWebApp();
-            var shadowCopiedPlug = isWebApp
-                ? AspNetExt.GetAspNetDeploymentPath(plugin, _shadowCopyFolder)
-                : GetDeploymentPath(plugin);
-
+            var shadowCopiedPluginPath = GetDeploymentPathInfo(plugin);
             //we can now register the plugin definition
-            var shadowCopiedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(shadowCopiedPlug.FullName));
+            var shadowCopiedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(shadowCopiedPluginPath.FullName));
 
             //add the reference to the build manager
             Debug.WriteLine("Adding to BuildManager: '{0}'", shadowCopiedAssembly.FullName);
 
-            if (isWebApp)
+            if (CommonHelper.IsWebApp())
                 BuildManager.AddReferencedAssembly(shadowCopiedAssembly);
 
             return shadowCopiedAssembly;
+        }
+
+        private static FileInfo GetDeploymentPathInfo(FileInfo plugin)
+        {
+            if (CommonHelper.IsWebApp() && NetCommonHelper.GetTrustLevel() == AspNetHostingPermissionLevel.Unrestricted)
+            {
+                var directory = AppDomain.CurrentDomain.DynamicDirectory;
+                Debug.WriteLine(plugin.FullName + " to " + directory);
+
+                //were running in full trust so copy to standard dynamic folder
+                return GetFullTrustDeploymentPath(plugin, new DirectoryInfo(directory));
+            }
+
+            return GetMediumTrustDeploymentPath(plugin, _shadowCopyFolder);
+        }
+
+        private static FileInfo GetMediumTrustDeploymentPath(FileSystemInfo plugin, DirectoryInfo shadowCopyPlugFolder)
+        {
+            var shouldCopy = true;
+            var shadowCopiedPlug = new FileInfo(Path.Combine(shadowCopyPlugFolder.FullName, plugin.Name));
+
+            //check if a shadow copied file already exists and if it does, check if it's updated, if not don't copy
+            if (shadowCopiedPlug.Exists)
+            {
+                //it's better to use LastWriteTimeUTC, but not all file systems have this property
+                //maybe it is better to compare file hash?
+                var areFilesIdentical = shadowCopiedPlug.CreationTimeUtc.Ticks >= plugin.CreationTimeUtc.Ticks;
+                if (areFilesIdentical)
+                {
+                    Debug.WriteLine("Not copying; files appear identical: '{0}'", shadowCopiedPlug.Name);
+                    shouldCopy = false;
+                }
+                else
+                {
+                    //delete an existing file
+
+                    //More info: http://www.nopcommerce.com/boards/t/11511/access-error-nopplugindiscountrulesbillingcountrydll.aspx?p=4#60838
+                    Debug.WriteLine("New plugin found; Deleting the old file: '{0}'", shadowCopiedPlug.Name);
+                    File.Delete(shadowCopiedPlug.FullName);
+                }
+            }
+
+            if (shouldCopy)
+            {
+                try
+                {
+                    File.Copy(plugin.FullName, shadowCopiedPlug.FullName, true);
+                }
+                catch (IOException)
+                {
+                    Debug.WriteLine(shadowCopiedPlug.FullName + " is locked, attempting to rename");
+                    //this occurs when the files are locked,
+                    //for some reason devenv locks plugin files some times and for another crazy reason you are allowed to rename them
+                    //which releases the lock, so that it what we are doing here, once it's renamed, we can re-shadow copy
+                    try
+                    {
+                        var oldFile = shadowCopiedPlug.FullName + Guid.NewGuid().ToString("N") + ".old";
+                        File.Move(shadowCopiedPlug.FullName, oldFile);
+                    }
+                    catch (IOException exc)
+                    {
+                        throw new IOException(shadowCopiedPlug.FullName + " rename failed, cannot initialize plugin", exc);
+                    }
+                    //ok, we've made it this far, now retry the shadow copy
+                    File.Copy(plugin.FullName, shadowCopiedPlug.FullName, true);
+                }
+            }
+
+            return shadowCopiedPlug;
+        }
+
+        private static FileInfo GetFullTrustDeploymentPath(FileSystemInfo plug, DirectoryInfo shadowCopyPlugFolder)
+        {
+            var shadowCopiedPlug = new FileInfo(Path.Combine(shadowCopyPlugFolder.FullName, plug.Name));
+            try
+            {
+                File.Copy(plug.FullName, shadowCopiedPlug.FullName, true);
+            }
+            catch (IOException)
+            {
+                Debug.WriteLine(shadowCopiedPlug.FullName + " is locked, attempting to rename");
+                //this occurs when the files are locked,
+                //for some reason devenv locks plugin files some times and for another crazy reason you are allowed to rename them
+                //which releases the lock, so that it what we are doing here, once it's renamed, we can re-shadow copy
+                try
+                {
+                    var oldFile = shadowCopiedPlug.FullName + Guid.NewGuid().ToString("N") + ".old";
+                    File.Move(shadowCopiedPlug.FullName, oldFile);
+                }
+                catch (IOException exc)
+                {
+                    throw new IOException(shadowCopiedPlug.FullName + " rename failed, cannot initialize plugin", exc);
+                }
+                //ok, we've made it this far, now retry the shadow copy
+                File.Copy(plug.FullName, shadowCopiedPlug.FullName, true);
+            }
+            return shadowCopiedPlug;
         }
 
         private static void VerifyNotNullPlugin(FileInfo plug)
@@ -388,12 +474,6 @@ namespace Saturn72.Core.Plugins
             });
         }
 
-        private static FileInfo GetDeploymentPath(FileInfo plug)
-        {
-            var shadowCopyPlugFolder = Directory.CreateDirectory(_shadowCopyFolder);
-            return AspNetExt.InitializeMediumTrust(plug, shadowCopyPlugFolder);
-        }
-
 
         /// <summary>
         ///     Determines if the folder is a bin plugin folder for a package
@@ -402,10 +482,9 @@ namespace Saturn72.Core.Plugins
         /// <returns></returns>
         private static bool IsPackagePluginFolder(DirectoryInfo folder)
         {
-            if (folder == null) return false;
-            if (folder.Parent == null) return false;
-            if (!folder.Parent.Name.Equals("Plugins", StringComparison.InvariantCultureIgnoreCase)) return false;
-            return true;
+            if (folder.IsNull() || folder.Parent.IsNull()) return false;
+
+            return folder.Parent.Name.Equals("Plugins", StringComparison.InvariantCultureIgnoreCase);
         }
 
         #endregion

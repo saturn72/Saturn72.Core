@@ -8,6 +8,7 @@ namespace Saturn72.Core.Plugins
     {
         private const string PluginRelativePath = "~/Plugins";
         private const string ShadowCopyRelativePath = "~/Plugins/bin";
+
         public string PluginFolder { get; set; }
         public bool ClearShadowDirectoryOnStartup { get; set; }
         public string ShadowCopyFolder { get; set; }

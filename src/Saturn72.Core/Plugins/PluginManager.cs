@@ -13,6 +13,7 @@ using Saturn72.Core.Plugins;
 using Saturn72.Extensions;
 
 [assembly: PreApplicationStartMethod(typeof (PluginManager), "Initialize")]
+
 namespace Saturn72.Core.Plugins
 {
     /// <summary>
@@ -60,11 +61,21 @@ namespace Saturn72.Core.Plugins
         public static void Initialize()
         {
             var pluginsSettings = PluginSettings.LoadSettings();
+            Initialize(pluginsSettings.PluginFolder,
+                pluginsSettings.ShadowCopyFolder,
+                pluginsSettings.ClearShadowDirectoryOnStartup);
+        }
+
+        public static void Initialize(string pluginFolderName, string shadowCopyFolder,
+            bool clearShadowDirectoryOnStartup)
+        {
             using (new WriteLockDisposable(Locker))
             {
                 // TODO: Add verbose exception handling / raising here since this is happening on app startup and could
                 // prevent app from starting altogether
-                _shadowCopyFolder = new DirectoryInfo(pluginsSettings.ShadowCopyFolder);
+
+
+                _shadowCopyFolder = new DirectoryInfo(shadowCopyFolder);
                 if (!_shadowCopyFolder.Exists)
                     Trace.WriteLine("Could not find plugins folder in path: " + _shadowCopyFolder);
 
@@ -77,9 +88,9 @@ namespace Saturn72.Core.Plugins
 
                     //ensure folders are created
                     Debug.WriteLine("Creating plugin folder (if not already exists). Folder path: " +
-                                    pluginsSettings.PluginFolder);
+                                    pluginFolderName);
 
-                    Directory.CreateDirectory(pluginsSettings.PluginFolder);
+                    Directory.CreateDirectory(pluginFolderName);
 
                     Debug.WriteLine(
                         "Creating shadow copy folder (if not already exists) and querying for dlls. Folder path: " +
@@ -89,7 +100,7 @@ namespace Saturn72.Core.Plugins
                     //get list of all files in bin
                     var binFiles = _shadowCopyFolder
                         .GetFiles("*", SearchOption.AllDirectories);
-                    if (pluginsSettings.ClearShadowDirectoryOnStartup)
+                    if (clearShadowDirectoryOnStartup)
                     {
                         //clear out shadow copied plugins
                         foreach (var f in binFiles)
@@ -107,7 +118,7 @@ namespace Saturn72.Core.Plugins
                     }
 
                     //load description files
-                    foreach (var dfd in GetDescriptionFilesAndDescriptors(pluginsSettings.PluginFolder))
+                    foreach (var dfd in GetDescriptionFilesAndDescriptors(pluginFolderName))
                     {
                         var descriptionFile = dfd.Key;
                         var pluginDescriptor = dfd.Value;
@@ -424,7 +435,8 @@ namespace Saturn72.Core.Plugins
                     }
                     catch (IOException exc)
                     {
-                        throw new IOException(shadowCopiedPlug.FullName + " rename failed, cannot initialize plugin", exc);
+                        throw new IOException(shadowCopiedPlug.FullName + " rename failed, cannot initialize plugin",
+                            exc);
                     }
                     //ok, we've made it this far, now retry the shadow copy
                     File.Copy(plugin.FullName, shadowCopiedPlug.FullName, true);

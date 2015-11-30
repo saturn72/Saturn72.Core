@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Saturn72.Core.Domain.Users;
 
 namespace Saturn72.Core.Domain.Logging
 {
-    public class LogRecord : BaseEntity
+    public class LogRecord : BaseEntity, ICreateableEntity
     {
         /// <summary>
         /// Gets or sets the log level identifier

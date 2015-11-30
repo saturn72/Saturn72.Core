@@ -61,12 +61,12 @@ namespace Saturn72.Core.Plugins
         public static void Initialize()
         {
             var pluginsSettings = PluginSettings.LoadSettings();
-            Initialize(pluginsSettings.PluginFolder,
+            InitializeWithParameters(pluginsSettings.PluginFolder,
                 pluginsSettings.ShadowCopyFolder,
                 pluginsSettings.ClearShadowDirectoryOnStartup);
         }
 
-        public static void Initialize(string pluginFolderName, string shadowCopyFolder,
+        public static void InitializeWithParameters(string pluginFolderName, string shadowCopyFolder,
             bool clearShadowDirectoryOnStartup)
         {
             using (new WriteLockDisposable(Locker))

@@ -21,7 +21,7 @@ namespace Saturn72.Core.Infrastructure
 
         private bool ignoreReflectionErrors = true;
         private bool loadAppDomainAssemblies = true;
-        private string assemblySkipLoadingPattern = "^System|^mscorlib|^vshost|^Microsoft|^Autofac|^AutoMapper|^Castle|^EntityFramework|^FluentValidation|^log4net|^Newtonsoft|^nunit|^xunit|^Recaptcha|^Telerik|^MongoDB|^Sqlite|^NLog|^RestSharp";
+        private string assemblySkipLoadingPattern = "^System|^mscorlib|^vshost|^Microsoft|^Autofac|^AutoMapper|^Castle|^EntityFramework|^FluentValidation|^log4net|^Newtonsoft|^nunit|^xunit|^Recaptcha|^Telerik|^MongoDB|^Sqlite|^NLog|^RestSharp|^Antlr|^Owin|^WebGrease";
         private string assemblyRestrictToLoadingPattern = ".*";
         private IList<string> assemblyNames = new List<string>();
 

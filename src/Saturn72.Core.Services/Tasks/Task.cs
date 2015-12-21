@@ -2,8 +2,8 @@ using System;
 using Autofac;
 using Saturn72.Core.Domain.Tasks;
 using Saturn72.Core.Infrastructure;
-using Saturn72.Core.Infrastructure.Tasks;
 using Saturn72.Core.Logging;
+using Saturn72.Core.Tasks;
 using Saturn72.Extensions;
 
 namespace Saturn72.Core.Services.Tasks

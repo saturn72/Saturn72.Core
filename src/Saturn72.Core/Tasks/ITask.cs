@@ -1,4 +1,4 @@
-﻿namespace Saturn72.Core.Infrastructure.Tasks
+﻿namespace Saturn72.Core.Tasks
 {
     public interface ITask
     {

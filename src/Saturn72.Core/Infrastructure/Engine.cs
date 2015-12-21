@@ -9,7 +9,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Saturn72.Core.Infrastructure.DependencyManagement;
-using Saturn72.Core.Infrastructure.Tasks;
+using Saturn72.Core.Tasks;
 using Saturn72.Extensions;
 
 namespace Saturn72.Core.Infrastructure

@@ -113,6 +113,7 @@
     <Compile Include="Sites\PortalService.cs" />
     <Compile Include="Tasks\IAutoAssignedScheduleTask.cs" />
     <Compile Include="Tasks\IScheduleTaskService.cs" />
+    <Compile Include="Tasks\ITaskManager.cs" />
     <Compile Include="Tasks\ScheduleTaskService.cs" />
     <Compile Include="Tasks\Task.cs" />
     <Compile Include="Tasks\TaskManager.cs" />

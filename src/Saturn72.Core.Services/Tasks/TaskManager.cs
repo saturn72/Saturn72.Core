@@ -7,23 +7,15 @@ using Saturn72.Extensions;
 
 namespace Saturn72.Core.Services.Tasks
 {
-    public class TaskManager
+    public class TaskManager : ITaskManager
     {
-        #region Ctor
-
-        private TaskManager()
+        public void Start()
         {
+            Initialize();
+            _taskThreads.ForEachItem(t => t.InitTimer());
         }
 
-        #endregion
-
-        #region Properties
-
-        public static TaskManager Instance => _taskManager;
-
-        #endregion
-
-        public void Initialize()
+        protected virtual void Initialize()
         {
             _taskThreads.Clear();
 
@@ -102,14 +94,8 @@ namespace Saturn72.Core.Services.Tasks
             });
         }
 
-        public void Start()
-        {
-            _taskThreads.ForEachItem(t => t.InitTimer());
-        }
-
         #region Fields
 
-        private static readonly TaskManager _taskManager = new TaskManager();
         private readonly IList<TaskThread> _taskThreads = new List<TaskThread>();
         private readonly int _notRunTasksInterval = 30*60;
 

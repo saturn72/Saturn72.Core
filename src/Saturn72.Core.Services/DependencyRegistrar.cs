@@ -38,6 +38,9 @@ namespace Saturn72.Core.Services
             builder.RegisterType<PortalService>().As<IProtalService>().InstancePerLifetimeScope();
             builder.RegisterType<ScheduleTaskService>().As<IScheduleTaskService>().InstancePerLifetimeScope();
 
+            //Managers
+            builder.RegisterType<TaskManager>().As<ITaskManager>().InstancePerLifetimeScope();
+
 
             builder.RegisterGeneric(typeof (ListDataCollection<>)).As(typeof (IDataCollection<>))
                 //.Named("list", typeof (IDataCollection<>))

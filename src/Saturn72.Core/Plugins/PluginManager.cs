@@ -12,8 +12,7 @@ using Saturn72.Core.ComponentModel;
 using Saturn72.Core.Plugins;
 using Saturn72.Extensions;
 
-[assembly: PreApplicationStartMethod(typeof (PluginManager), "Initialize")]
-
+[assembly: PreApplicationStartMethod(typeof(PluginManager), "Initialize")]
 namespace Saturn72.Core.Plugins
 {
     /// <summary>
@@ -160,7 +159,6 @@ namespace Saturn72.Core.Plugins
                             var pluginFiles = descriptionFile.Directory.GetFiles("*.dll", SearchOption.AllDirectories)
                                 //just make sure we're not registering shadow copied plugins
                                 .Where(x => !binFiles.Select(q => q.FullName).Contains(x.FullName))
-                                .Where(x => IsPackagePluginFolder(x.Directory))
                                 .ToList();
 
                             //other plugin description info
@@ -303,13 +301,7 @@ namespace Saturn72.Core.Plugins
             //add display order and path to list
             foreach (var descriptionFile in pluginFolder.GetFiles("Description.txt", SearchOption.AllDirectories))
             {
-                if (!IsPackagePluginFolder(descriptionFile.Directory))
-                    continue;
-
-                //parse file
                 var pluginDescriptor = PluginFileParser.ParsePluginDescriptionFile(descriptionFile.FullName);
-
-                //populate list
                 result.Add(new KeyValuePair<FileInfo, PluginDescriptor>(descriptionFile, pluginDescriptor));
             }
 
@@ -485,20 +477,6 @@ namespace Saturn72.Core.Plugins
                 throw new InvalidOperationException(message);
             });
         }
-
-
-        /// <summary>
-        ///     Determines if the folder is a bin plugin folder for a package
-        /// </summary>
-        /// <param name="folder"></param>
-        /// <returns></returns>
-        private static bool IsPackagePluginFolder(DirectoryInfo folder)
-        {
-            if (folder.IsNull() || folder.Parent.IsNull()) return false;
-
-            return folder.Parent.Name.Equals("Plugins", StringComparison.InvariantCultureIgnoreCase);
-        }
-
         #endregion
     }
 }

@@ -19,10 +19,7 @@ namespace Saturn72.Core.Services.Tasks
 
         #region Properties
 
-        public static TaskManager Instance
-        {
-            get { return _taskManager; }
-        }
+        public static TaskManager Instance => _taskManager;
 
         #endregion
 

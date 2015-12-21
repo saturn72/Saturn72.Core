@@ -27,10 +27,7 @@ namespace Saturn72.Core.Infrastructure.DependencyManagement
 
         #region Properties
 
-        public IContainer Container
-        {
-            get { return _container; }
-        }
+        public IContainer Container => _container;
 
         #endregion Properties
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -9,6 +10,7 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Saturn72.Core.Infrastructure.DependencyManagement;
 using Saturn72.Core.Infrastructure.Tasks;
+using Saturn72.Extensions;
 
 namespace Saturn72.Core.Infrastructure
 {
@@ -40,15 +42,27 @@ namespace Saturn72.Core.Infrastructure
 
         protected virtual void LoadPlugins()
         {
-            var apsmArray = GetType().Assembly.GetCustomAttributes(typeof(PreApplicationStartMethodAttribute), false);
-            if (!apsmArray.Any())
-                return;
+            var appDomainAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var preAppStartObjects = new List<object>();
 
-            var apsm = apsmArray[0] as PreApplicationStartMethodAttribute;
-            var type = apsm.Type;
-            var methodInfo = type.GetMethod(apsm.MethodName);
-            var instance = Activator.CreateInstance(type);
-            methodInfo.Invoke(instance, null);
+            appDomainAssemblies.ForEachItem(asm =>
+            {
+                var attributes = asm.GetCustomAttributes(typeof (PreApplicationStartMethodAttribute), false);
+                attributes.ForEachItem(att => preAppStartObjects.Add(att));
+            });
+
+            foreach (var paso in preAppStartObjects)
+            {
+                var apsm = paso as PreApplicationStartMethodAttribute;
+                var type = apsm.Type;
+                if (type.IsAbstract)
+                    continue;
+                var methodInfo = type.GetMethod(apsm.MethodName);
+                var instance = Activator.CreateInstance(type);
+                Trace.WriteLine("Start pre-application start method on type: " + type.FullName + " Method: " + apsm.MethodName);
+
+                methodInfo.Invoke(instance, null);
+            }
         }
 
         #region Fields

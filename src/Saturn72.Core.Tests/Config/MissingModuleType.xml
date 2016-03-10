@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+  <appdomain>
+  </appdomain>
+  <modules>
+    <module />
+    <module Name="name2" Type="Saturn72.Modules.WebApi.RestfulServer, AssemblyName" Active="false" Description="Module description" />
+  </modules>
+</config>

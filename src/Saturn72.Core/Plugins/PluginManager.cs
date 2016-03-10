@@ -322,7 +322,7 @@ namespace Saturn72.Core.Plugins
             //var fileAssemblyName = AssemblyName.GetAssemblyName(fileInfo.FullName);
             //foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
             //{
-            //    if (a.FullName.Equals(fileAssemblyName.FullName, StringComparison.InvariantCultureIgnoreCase))
+            //    if (a.FullName.Equals(fileAssemblyName.Type, StringComparison.InvariantCultureIgnoreCase))
             //        return true;
             //}
             //return false;

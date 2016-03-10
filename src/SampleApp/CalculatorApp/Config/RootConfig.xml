@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <appdomain>
+    <modules Directory="Modules" UseShadowCopy="True" ShadowDirectory="ShadowdirData1"/>
+    <plugins Directory="Plugins" UseShadowCopy="True" ShadowDirectory="ShadowdirData2"/>
+  </appdomain>
+  <modules>
+    <module Name="Entity Framework Repository" Type="Saturn72.Modules.Data.EntityFrameworkRepository, AssemblyName" Active="true" Description="Module description"/>
+    <module Name="App Api service" Type="Saturn72.Modules.WebApi.RestfulServer, AssemblyName" Active="true" Description="Module description"/>
+  </modules>
+</config>

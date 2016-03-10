@@ -10,13 +10,7 @@ namespace Saturn72.Core.Caching
     /// </summary>
     public class MemoryCacheManager : ICacheManager
     {
-        protected ObjectCache Cache
-        {
-            get
-            {
-                return MemoryCache.Default;
-            }
-        }
+        protected ObjectCache Cache => MemoryCache.Default;
 
         /// <summary>
         /// Gets or sets the value associated with the specified key.

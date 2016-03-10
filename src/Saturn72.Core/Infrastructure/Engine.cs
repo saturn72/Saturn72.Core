@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
-using System.Web.Mvc;
 using Autofac;
-using Autofac.Integration.Mvc;
-using Autofac.Integration.WebApi;
 using Saturn72.Core.Infrastructure.DependencyManagement;
 using Saturn72.Core.Tasks;
 using Saturn72.Extensions;
@@ -59,7 +55,8 @@ namespace Saturn72.Core.Infrastructure
                     continue;
                 var methodInfo = type.GetMethod(apsm.MethodName);
                 var instance = Activator.CreateInstance(type);
-                Trace.WriteLine("Start pre-application start method on type: " + type.FullName + " Method: " + apsm.MethodName);
+                Trace.WriteLine("Start pre-application start method on type: " + type.FullName + " Method: " +
+                                apsm.MethodName);
 
                 methodInfo.Invoke(instance, null);
             }
@@ -89,7 +86,7 @@ namespace Saturn72.Core.Infrastructure
             var drTypes = typeFinder.FindClassesOfType<IDependencyRegistrar>();
             var drInstances = new List<IDependencyRegistrar>();
             foreach (var drType in drTypes)
-                drInstances.Add((IDependencyRegistrar)Activator.CreateInstance(drType));
+                drInstances.Add((IDependencyRegistrar) Activator.CreateInstance(drType));
 
             //sort
             drInstances = drInstances.AsQueryable().OrderBy(t => t.Order).ToList();
@@ -99,12 +96,14 @@ namespace Saturn72.Core.Infrastructure
             builder.Update(container);
             ContainerManager = new ContainerManager(container);
 
-            //set dependency resolver
-            if (CommonHelper.IsWebApp())
-            {
-                DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-                GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            }
+
+            //TODO: only for web apps
+            ////set dependency resolver
+            //if (CommonHelper.IsWebApp())
+            //{
+            //    DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            //    GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            //}
         }
 
         /// <summary>
@@ -116,7 +115,7 @@ namespace Saturn72.Core.Infrastructure
             var startUpTaskTypes = typeFinder.FindClassesOfType<IStartupTask>();
             var startUpTasks = new List<IStartupTask>();
             foreach (var startUpTaskType in startUpTaskTypes)
-                startUpTasks.Add((IStartupTask)Activator.CreateInstance(startUpTaskType));
+                startUpTasks.Add((IStartupTask) Activator.CreateInstance(startUpTaskType));
             //sort
             startUpTasks = startUpTasks.AsQueryable().OrderBy(st => st.Order).ToList();
             foreach (var startUpTask in startUpTasks)

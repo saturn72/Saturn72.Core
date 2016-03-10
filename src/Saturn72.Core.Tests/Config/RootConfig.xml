@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<config>
+  <appdomain DeleteShadowDirectoryOnStartup="True" ShadowDirectory="ShadowdirData1">
+    <modules Directory="Modules" />
+    <plugins Directory="Plugins" />
+  </appdomain>
+  <modules>
+    <module Name="name1" Type="Saturn72.Modules.Data.EntityFrameworkRepository, AssemblyName" Active="true"
+            Description="Module description" />
+    <module Name="name2" Type="Saturn72.Modules.WebApi.RestfulServer, AssemblyName" Active="false" Description="Module description" />
+  </modules>
+</config>

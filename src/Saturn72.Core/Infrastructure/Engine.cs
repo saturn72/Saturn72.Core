@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Web;
 using Autofac;
 using Saturn72.Core.Infrastructure.DependencyManagement;
@@ -10,7 +9,7 @@ using Saturn72.Extensions;
 
 namespace Saturn72.Core.Infrastructure
 {
-    public class Engine : IEngine
+    public class Engine: IEngine
     {
         #region Properties
 
@@ -22,8 +21,9 @@ namespace Saturn72.Core.Infrastructure
         {
             if (!CommonHelper.IsWebApp())
                 LoadPlugins();
-            RegisterDependencies();
-            RunStartupTasks();
+            var typeFinder = new WebAppTypeFinder();
+            RegisterDependencies(typeFinder);
+            RunStartupTasks(typeFinder);
         }
 
         public TService Resolve<TService>(object key = null) where TService : class
@@ -68,13 +68,16 @@ namespace Saturn72.Core.Infrastructure
 
         #region Utilities
 
-        protected virtual void RegisterDependencies()
+        /// <summary>
+        /// Registers all dependencies across domain
+        /// </summary>
+        /// <param name="typeFinder">TypeFinder <see cref="ITypeFinder"/></param>
+        protected virtual void RegisterDependencies(ITypeFinder typeFinder)
         {
             var builder = new ContainerBuilder();
             var container = builder.Build();
 
             //Core dependencies
-            var typeFinder = new WebAppTypeFinder();
             builder = new ContainerBuilder();
             builder.RegisterInstance(this).As<IEngine>().SingleInstance();
             builder.RegisterInstance(typeFinder).As<ITypeFinder>().SingleInstance();
@@ -83,16 +86,7 @@ namespace Saturn72.Core.Infrastructure
 
             //register dependencies provided by other assemblies
             builder = new ContainerBuilder();
-            var drTypes = typeFinder.FindClassesOfType<IDependencyRegistrar>();
-            var drInstances = new List<IDependencyRegistrar>();
-            foreach (var drType in drTypes)
-                drInstances.Add((IDependencyRegistrar) Activator.CreateInstance(drType));
-
-            //sort
-            drInstances = drInstances.AsQueryable().OrderBy(t => t.Order).ToList();
-            foreach (var dependencyRegistrar in drInstances)
-                dependencyRegistrar.Register(builder, typeFinder);
-
+            typeFinder.FindTypeAndRunMethod<IDependencyRegistrar>(dr => dr.Register(builder, typeFinder), dr => dr.Order);
             builder.Update(container);
             ContainerManager = new ContainerManager(container);
 
@@ -107,19 +101,12 @@ namespace Saturn72.Core.Infrastructure
         }
 
         /// <summary>
-        ///     Runs all startup task across domain
+        /// Runs all startup task across domain
         /// </summary>
-        protected virtual void RunStartupTasks()
+        /// <param name="typeFinder">TypeFinder <see cref="ITypeFinder"/></param>
+        protected virtual void RunStartupTasks(ITypeFinder typeFinder)
         {
-            var typeFinder = ContainerManager.Resolve<ITypeFinder>();
-            var startUpTaskTypes = typeFinder.FindClassesOfType<IStartupTask>();
-            var startUpTasks = new List<IStartupTask>();
-            foreach (var startUpTaskType in startUpTaskTypes)
-                startUpTasks.Add((IStartupTask) Activator.CreateInstance(startUpTaskType));
-            //sort
-            startUpTasks = startUpTasks.AsQueryable().OrderBy(st => st.Order).ToList();
-            foreach (var startUpTask in startUpTasks)
-                startUpTask.Execute();
+            typeFinder.FindTypeAndRunMethod<IStartupTask>(s => s.Execute(), s => s.Order);
         }
 
         #endregion Utilities

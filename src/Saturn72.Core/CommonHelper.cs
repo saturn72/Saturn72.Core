@@ -174,11 +174,11 @@ namespace Saturn72.Core
             //so we do it manually here
 
             if (type == typeof(List<int>))
-                return new Extensions.GenericListTypeConverter<int>();
+                return new Extensions.Common.GenericListTypeConverter<int>();
             if (type == typeof(List<decimal>))
-                return new Extensions.GenericListTypeConverter<decimal>();
+                return new Extensions.Common.GenericListTypeConverter<decimal>();
             if (type == typeof(List<string>))
-                return new Extensions.GenericListTypeConverter<string>();
+                return new Extensions.Common.GenericListTypeConverter<string>();
             return TypeDescriptor.GetConverter(type);
         }
 

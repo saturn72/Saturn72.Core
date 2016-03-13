@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Compilation;
 using Saturn72.Core.ComponentModel;
 using Saturn72.Extensions;
+using Saturn72.Extensions.Common;
 
 namespace Saturn72.Core.Infrastructure
 {
@@ -32,32 +33,18 @@ namespace Saturn72.Core.Infrastructure
             {
                 using (new WriteLockDisposable(Locker))
                 {
-                    _shadowCopyDirectory = componentDir + @"\bin";
+                    _shadowCopyDirectory = Path.GetFullPath(componentDir + @"\bin");
                     var binFiles = Directory.Exists(_shadowCopyDirectory)
                         ? Directory.GetFiles(_shadowCopyDirectory)
                         : new string[] {};
 
-                    if (data.DeleteShadowDirectoryOnStartup && Directory.Exists(_shadowCopyDirectory))
-                    {
-                        foreach (var f in binFiles)
-                        {
-                            Debug.WriteLine("Deleting " + f);
-                            try
-                            {
-                                IoUtil.DeleteFile(f);
-                            }
-                            catch (Exception exc)
-                            {
-                                Debug.WriteLine("Error deleting file " + f + ". Exception: " + exc);
-                            }
-                        }
-                        IoUtil.DeleteDirectory(_shadowCopyDirectory);
-                    }
+                    DeleteShadowDirectoryIfRequired(data, binFiles);
 
                     IoUtil.CreateDirectoryIfNotExists(_shadowCopyDirectory);
+
                     var cDirAbsolutePath = componentDir.Contains(":")
                         ? componentDir
-                        : IoUtil.RelativePathToAbsolutePath(componentDir);
+                        : Path.GetFullPath(componentDir);
                     Guard.NotEmpty(cDirAbsolutePath);
 
                     try
@@ -99,6 +86,26 @@ namespace Saturn72.Core.Infrastructure
                         throw fail;
                     }
                 }
+            }
+        }
+
+        private static void DeleteShadowDirectoryIfRequired(AppDomainLoadData data, string[] binFiles)
+        {
+            if (data.DeleteShadowDirectoryOnStartup && Directory.Exists(_shadowCopyDirectory))
+            {
+                foreach (var f in binFiles)
+                {
+                    Debug.WriteLine("Deleting " + f);
+                    try
+                    {
+                        IoUtil.DeleteFile(f);
+                    }
+                    catch (Exception exc)
+                    {
+                        Debug.WriteLine("Error deleting file " + f + ". Exception: " + exc);
+                    }
+                }
+                IoUtil.DeleteDirectory(_shadowCopyDirectory);
             }
         }
 

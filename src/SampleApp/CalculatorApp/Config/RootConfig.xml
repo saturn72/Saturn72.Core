@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <config>
-  <appdomain>
     <!--Thesepaths are good for development settings. consider removig the ..\..\..\ in production-->
-    <modules Directory="..\..\..\Modules\binaries" UseShadowCopy="True" ShadowDirectory="ShadowdirData1"/>
-    <plugins Directory="Plugins" UseShadowCopy="True" ShadowDirectory="ShadowdirData2"/>
-  </appdomain>
+    <appdomain DeleteShadowDirectoryOnStartup="True">
+      <modules Directory="..\..\Modules\binaries" />
+      <plugins Directory="..\..\Plugins\binaries" />
+    </appdomain>
   <modules>
     <module Name="Entity Framework Repository" Type="Saturn72.Modules.EntityFramework.EntityFrameworkModule, Saturn72.Modules.EntityFramework" Active="true" Description="Module description"/>
   </modules>

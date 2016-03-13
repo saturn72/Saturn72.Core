@@ -1,4 +1,5 @@
 ﻿using System;
+using Saturn72.Core;
 using Saturn72.Core.Configuration;
 using Saturn72.Core.Infrastructure;
 using Saturn72.Core.Modules;
@@ -14,12 +15,15 @@ namespace Saturn72.App.Common
         public void Start()
         {
             Console.Out.WriteLine("Start {0} application".AsFormat(_appId));
-            LoadAllModules();
-            StartAllModules();
 
-            //Load and start AllModules
-            //Loadand start AllPlugins
-            //
+            Console.Out.WriteLine("Load application modules...");
+            LoadAllModules();
+
+            Console.Out.WriteLine("Start application engine...");
+            EngineContext.Initialize(true);
+
+            Console.Out.WriteLine("Start all modules...");
+            StartAllModules();
         }
 
 
@@ -28,7 +32,8 @@ namespace Saturn72.App.Common
         /// </summary>
         protected virtual void StartAllModules()
         {
-            _configManager.Modules.ForEachItem(m => { ModuleManager.Start(m); });
+            var typeFinder = Resolver.TypeFinder;
+            typeFinder.FindTypeAndRunMethod<IModule>(m=>m.Start(), m=>m.StartupOrder);
         }
 
         #region Fields

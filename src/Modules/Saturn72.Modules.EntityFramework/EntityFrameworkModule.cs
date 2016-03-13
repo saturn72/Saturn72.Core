@@ -7,15 +7,17 @@ namespace Saturn72.Modules.EntityFramework
     {
         public void Load()
         {
-            Resolve<IDatabaseProvider>().SetDatabaseInitializer();
         }
 
         public void Start()
         {
+            Resolve<IDatabaseProvider>().SetDatabaseInitializer();
         }
 
         public void Stop()
         {
         }
+
+        public int StartupOrder => -1000;
     }
 }

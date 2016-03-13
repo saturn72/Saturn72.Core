@@ -77,16 +77,16 @@
       <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Saturn72.Extensions.AspNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Saturn72.Extensions.AspNet.1.0.0\lib\net452\Saturn72.Extensions.AspNet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -160,6 +160,7 @@
     <Compile Include="Infrastructure\Singleton.cs" />
     <Compile Include="Infrastructure\WebAppTypeFinder.cs" />
     <Compile Include="IPagedList.cs" />
+    <Compile Include="Infrastructure\TypeFinderExtensions.cs" />
     <Compile Include="Saturn72Exception.cs" />
     <Compile Include="PagedList.cs" />
     <Compile Include="Saturn72ServerVersion.cs" />
@@ -178,7 +179,16 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\submodules\Saturn72.Extensions\Saturn72.Extensions.AspNet\Saturn72.Extensions.AspNet.csproj">
+      <Project>{C0DDC567-BD56-4DD1-9503-747945420734}</Project>
+      <Name>Saturn72.Extensions.AspNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\submodules\Saturn72.Extensions\Saturn72.Extensions\Saturn72.Extensions.csproj">
+      <Project>{773F4467-A469-4196-A9B3-76A6C889C3ED}</Project>
+      <Name>Saturn72.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

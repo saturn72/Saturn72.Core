@@ -17,5 +17,9 @@
         /// </summary>
         void Stop();
 
+        /// <summary>
+        /// Module startup order
+        /// </summary>
+        int StartupOrder { get;  }
     }
 }

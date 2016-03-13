@@ -2,9 +2,12 @@
 {
     public class Resolver
     {
-        protected static TService Resolve<TService>() where TService : class
+        public static ITypeFinder TypeFinder => Resolve<ITypeFinder>();
+
+        protected static TService Resolve<TService>(object key = null) where TService : class
         {
-            return EngineContext.Current.Resolve<TService>();
+            return EngineContext.Current.Resolve<TService>(key);
         }
+
     }
 }

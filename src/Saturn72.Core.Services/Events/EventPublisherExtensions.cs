@@ -1,4 +1,5 @@
 ﻿using Saturn72.Core.Events;
+using Saturn72.Core.Services.Events.Crud;
 
 namespace Saturn72.Core.Services.Events
 {

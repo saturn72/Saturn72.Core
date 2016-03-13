@@ -9,7 +9,7 @@ using Saturn72.Extensions;
 namespace Saturn72.Core.Configuration
 {
     /// <summary>
-    ///     Manager of data settings (connection string)
+    ///     Manager of application settings file
     /// </summary>
     public class SettingsLoader
     {
@@ -62,7 +62,7 @@ namespace Saturn72.Core.Configuration
                     settings.Add(str);
             }
 
-            var propertyInfos = typeof (TSettings).GetProperties().Where(p=>p.GetSetMethod().NotNull());
+            var propertyInfos = typeof (TSettings).GetProperties().Where(p => p.GetSetMethod().NotNull());
 
             foreach (var setting in settings)
             {
@@ -80,9 +80,9 @@ namespace Saturn72.Core.Configuration
                 var value = setting.Substring(separatorIndex + 1).Trim();
 
                 tSettings.RawSettings.Add(key, value);
-                var pInfo = propertyInfos.FirstOrDefault(pi=>pi.Name.EqualsTo(key));
+                var pInfo = propertyInfos.FirstOrDefault(pi => pi.Name.EqualsTo(key));
 
-                if(pInfo.NotNull())
+                if (pInfo.NotNull())
                     pInfo.SetValue(tSettings, value);
 
                 //switch (key)
@@ -104,23 +104,6 @@ namespace Saturn72.Core.Configuration
             return tSettings;
         }
 
-        /// <summary>
-        ///     Convert data settings to string representation
-        /// </summary>
-        /// <param name="settings">Settings</param>
-        /// <returns>Text</returns>
-        protected virtual string ComposeSettings(DataSettings settings)
-        {
-            if (settings == null)
-                return "";
-
-            return string.Format("DataProvider: {0}{2}DataConnectionString: {1}{2}",
-                settings.DataProvider,
-                settings.DataConnectionString,
-                Environment.NewLine
-                );
-        }
-
         public string GetSettingContent(string filePath = null)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -138,36 +121,13 @@ namespace Saturn72.Core.Configuration
         /// </summary>
         /// <param name="filePath">File path; pass null to use default settings file path</param>
         /// <returns></returns>
-        public static TSettings LoadSettings<TSettings>(string filePath = null) where TSettings:SettingsBase, new()
+        public static TSettings LoadSettings<TSettings>(string filePath = null) where TSettings : SettingsBase, new()
         {
             var loader = new SettingsLoader();
             var settingContent = loader.GetSettingContent(filePath);
             return settingContent != null
                 ? loader.ParseSettings<TSettings>(settingContent)
                 : new TSettings();
-        }
-
-        /// <summary>
-        ///     Save settings to a file
-        /// </summary>
-        /// <param name="settings"></param>
-        public virtual void SaveSettings(DataSettings settings)
-        {
-            if (settings == null)
-                throw new ArgumentNullException("settings");
-
-            //use webHelper.MapPath instead of HostingEnvironment.MapPath which is not available in unit tests
-            var filePath = Path.Combine(MapPath("~/App_Data/"), FILE_NAME);
-            if (!File.Exists(filePath))
-            {
-                using (File.Create(filePath))
-                {
-                    //we use 'using' to close the file after it's created
-                }
-            }
-
-            var text = ComposeSettings(settings);
-            File.WriteAllText(filePath, text);
         }
     }
 }

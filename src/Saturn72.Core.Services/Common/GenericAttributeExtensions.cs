@@ -34,13 +34,15 @@ namespace Saturn72.Core.Services.Common
         public static TPropType GetAttribute<TPropType>(this BaseEntity entity,
             string key, IGenericAttributeService genericAttributeService, int portalId = 0)
         {
+            throw new NotImplementedException("GetAttribute has bug.");
             if (entity == null)
                 throw new ArgumentNullException("entity");
 
-            var dataProvider = EngineContext.Current.Resolve<BaseDataProvider>();
-            Guard.NotNull(dataProvider);
-            var keyGroup = dataProvider.GetUnproxiedEntityType(entity).Name;
+            //var dataProvider = EngineContext.Current.Resolve<IDatabaseProvider>();
+            //Guard.NotNull(dataProvider);
+            //var keyGroup = dataProvider.GetUnproxiedEntityType(entity).Name;
 
+            var keyGroup = "";
             var props = genericAttributeService.GetAttributesForEntity(entity.Id, keyGroup);
             //little hack here (only for unit testing). we should write ecpect-return rules in unit tests for such cases
             if (props == null)

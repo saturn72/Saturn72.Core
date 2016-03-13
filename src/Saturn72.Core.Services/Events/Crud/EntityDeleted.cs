@@ -1,4 +1,4 @@
-namespace Saturn72.Core.Services.Events
+namespace Saturn72.Core.Services.Events.Crud
 {
     public class EntityDeleted<T> : BaseCrudEvent<T> where T : BaseEntity
     {

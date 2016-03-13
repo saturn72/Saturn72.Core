@@ -1,4 +1,4 @@
-﻿namespace Saturn72.Core.Services.Events
+﻿namespace Saturn72.Core.Services.Events.Crud
 {
     /// <summary>
     /// A container for entities that have been inserted.

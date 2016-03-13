@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,7 +7,6 @@ using System.Threading;
 using System.Web;
 using System.Web.Compilation;
 using Saturn72.Core.ComponentModel;
-using Saturn72.Core.Plugins;
 using Saturn72.Extensions;
 
 namespace Saturn72.Core.Infrastructure
@@ -23,18 +21,15 @@ namespace Saturn72.Core.Infrastructure
         private static string _shadowCopyDirectory;
 
         /// <summary>
-        /// Loads all components to AppDomain
+        ///     Loads all components to AppDomain
         /// </summary>
-        /// <param name="data">AppDomainLoadData <see cref="AppDomainLoadData"/></param>
+        /// <param name="data">AppDomainLoadData <see cref="AppDomainLoadData" /></param>
         public static void Load(AppDomainLoadData data)
         {
             var componentDirectories = new[] {data.PluginsParentDirecotry, data.ModulesParentDirecotry};
 
             foreach (var componentDir in componentDirectories)
             {
-                if (!componentDir.HasValue())
-                    continue;
-
                 using (new WriteLockDisposable(Locker))
                 {
                     _shadowCopyDirectory = componentDir + @"\bin";
@@ -50,7 +45,7 @@ namespace Saturn72.Core.Infrastructure
                             try
                             {
                                 IoUtil.DeleteFile(f);
-                                }
+                            }
                             catch (Exception exc)
                             {
                                 Debug.WriteLine("Error deleting file " + f + ". Exception: " + exc);
@@ -60,12 +55,18 @@ namespace Saturn72.Core.Infrastructure
                     }
 
                     IoUtil.CreateDirectoryIfNotExists(_shadowCopyDirectory);
+                    var cDirAbsolutePath = componentDir.Contains(":")
+                        ? componentDir
+                        : IoUtil.RelativePathToAbsolutePath(componentDir);
+                    Guard.NotEmpty(cDirAbsolutePath);
+
                     try
                     {
-                        var dynamicLoadedFiles = Directory.GetFiles(componentDir, "*.dll", SearchOption.AllDirectories)
-                            //Not in the shadow copy
-                            .Where(x => !binFiles.Contains(x))
-                            .ToArray();
+                        var dynamicLoadedFiles =
+                            Directory.GetFiles(cDirAbsolutePath, "*.dll", SearchOption.AllDirectories)
+                                //Not in the shadow copy
+                                .Where(x => !binFiles.Contains(x))
+                                .ToArray();
 
                         //load all other referenced assemblies now
                         foreach (var dlf in dynamicLoadedFiles
@@ -79,7 +80,7 @@ namespace Saturn72.Core.Infrastructure
                     {
                         var msg = string.Empty;
                         foreach (var exception in ex.LoaderExceptions)
-                            msg = msg + (exception.Message + Environment.NewLine);
+                            msg = msg + exception.Message + Environment.NewLine;
 
                         var fail = new Exception(msg, ex);
                         Debug.WriteLine(fail.Message, fail);
@@ -164,6 +165,7 @@ namespace Saturn72.Core.Infrastructure
                 throw new InvalidOperationException(message);
             });
         }
+
         private static FileInfo GetDeploymentPathInfo(FileInfo plugin)
         {
             if (CommonHelper.IsWebApp() && NetCommonHelper.GetTrustLevel() == AspNetHostingPermissionLevel.Unrestricted)
@@ -261,8 +263,5 @@ namespace Saturn72.Core.Infrastructure
             }
             return shadowCopiedPlug;
         }
-
-
-
     }
 }

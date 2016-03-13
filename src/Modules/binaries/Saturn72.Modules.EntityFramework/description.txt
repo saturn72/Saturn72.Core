@@ -1,0 +1,5 @@
+﻿Author: Saturn72 Technologies team
+FriendlyName: EntityFramework Code First Connector
+FileName: Saturn72.Modules.EntityFramework.dll
+SupportedVersions: 1.00
+SystemName: Saturn72.Modules.EntityFramework

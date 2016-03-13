@@ -69,32 +69,16 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac.Integration.WebApi, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.WebApi.3.1.0\lib\net40\Autofac.Integration.WebApi.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Saturn72.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Saturn72.Extensions.1.0.0-CI00014\lib\net46\Saturn72.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Saturn72.Extensions.AspNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Saturn72.Extensions.AspNet.1.0.0-CI00010\lib\net452\Saturn72.Extensions.AspNet.dll</HintPath>
+      <HintPath>..\packages\Saturn72.Extensions.AspNet.1.0.0\lib\net452\Saturn72.Extensions.AspNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,9 +96,6 @@
     <Compile Include="Infrastructure\AppDomainLoadData.cs" />
     <Compile Include="Configuration\SettingsBase.cs" />
     <Compile Include="Configuration\XmlConfigManager.cs" />
-    <Compile Include="Data\BaseDataProvider.cs" />
-    <Compile Include="Data\BaseDataProviderManager.cs" />
-    <Compile Include="Data\DataSettings.cs" />
     <Compile Include="Configuration\SettingsLoader.cs" />
     <Compile Include="Data\IDataCollection.cs" />
     <Compile Include="Data\ListDataCollection.cs" />
@@ -123,6 +104,7 @@
     <Compile Include="Domain\Localization\LocaleStringResource.cs" />
     <Compile Include="Domain\Localization\LocalizationSettings.cs" />
     <Compile Include="ICreateableEntity.cs" />
+    <Compile Include="Infrastructure\Resolver.cs" />
     <Compile Include="IUpdateableEntity.cs" />
     <Compile Include="Domain\Sites\Portal.cs" />
     <Compile Include="Domain\Tasks\ScheduleTask.cs" />
@@ -137,7 +119,9 @@
     <Compile Include="IPortalContext.cs" />
     <Compile Include="IWebHelper.cs" />
     <Compile Include="IWorkContext.cs" />
+    <Compile Include="Modules\IModule.cs" />
     <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ModuleExtensions.cs" />
     <Compile Include="Modules\ModuleManager.cs" />
     <Compile Include="Net\HttpClientBase.cs" />
     <None Include="Net\Rest\CommonRestClient.cs.TOFIX" />
@@ -155,7 +139,6 @@
     <Compile Include="ComponentModel\WriteLockDisposable.cs" />
     <Compile Include="Configuration\ISettings.cs" />
     <Compile Include="Data\Configuration\Setting.cs" />
-    <Compile Include="Data\IDbContext.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\RepositoryExtensions.cs" />
     <Compile Include="Domain\Common\CommonSettings.cs" />
@@ -191,7 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

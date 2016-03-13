@@ -14,7 +14,7 @@ namespace Saturn72.App.Common
         public void Start()
         {
             Console.Out.WriteLine("Start {0} application".AsFormat(_appId));
-            LoadAppDomainAssemblies();
+            LoadAllModules();
             StartAllModules();
 
             //Load and start AllModules
@@ -83,7 +83,7 @@ namespace Saturn72.App.Common
             return ch;
         }
 
-        private void LoadAppDomainAssemblies()
+        private void LoadAllModules()
         {
             AppDomainLoader.Load(_configManager.AppDomainLoadData);
         }

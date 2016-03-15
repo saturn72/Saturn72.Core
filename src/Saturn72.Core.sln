@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.Data", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Extensions.UnitTesting", "..\submodules\Saturn72.Extensions\Saturn72.Extensions.UnitTesting\Saturn72.Extensions.UnitTesting.csproj", "{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Modules.Owin", "Modules\Saturn72.Modules.Owin\Saturn72.Modules.Owin.csproj", "{606AC4BF-5D5C-486E-80D1-D6762357673B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saturn72.Core.Web", "Saturn72.Core.Web\Saturn72.Core.Web.csproj", "{217B8F69-CA31-4DBA-B719-912439C08EA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +207,30 @@ Global
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Saturn72.Web.Dev|Any CPU.Build.0 = Release|Any CPU
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Saturn72.Web.Dev|x64.ActiveCfg = Release|x64
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4}.Saturn72.Web.Dev|x64.Build.0 = Release|x64
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Debug|x64.Build.0 = Debug|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Release|x64.ActiveCfg = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Release|x64.Build.0 = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Saturn72.Web.Dev|Any CPU.ActiveCfg = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Saturn72.Web.Dev|Any CPU.Build.0 = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Saturn72.Web.Dev|x64.ActiveCfg = Release|Any CPU
+		{606AC4BF-5D5C-486E-80D1-D6762357673B}.Saturn72.Web.Dev|x64.Build.0 = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Debug|x64.Build.0 = Debug|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Release|x64.ActiveCfg = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Release|x64.Build.0 = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Saturn72.Web.Dev|Any CPU.ActiveCfg = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Saturn72.Web.Dev|Any CPU.Build.0 = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Saturn72.Web.Dev|x64.ActiveCfg = Release|Any CPU
+		{217B8F69-CA31-4DBA-B719-912439C08EA4}.Saturn72.Web.Dev|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -217,5 +245,6 @@ Global
 		{FCF083C2-6542-4BBB-98CF-51CD9F84ED91} = {CFC65CF1-3F4F-469A-B831-383419C90428}
 		{D2A1B50B-9F66-4574-81B3-C486FCEB9D03} = {CFC65CF1-3F4F-469A-B831-383419C90428}
 		{5E9A7FFB-C52D-4FC7-B0F3-EA20102730F4} = {CFC65CF1-3F4F-469A-B831-383419C90428}
+		{606AC4BF-5D5C-486E-80D1-D6762357673B} = {DE025945-F1B1-4750-9C5C-8CFB43872D3A}
 	EndGlobalSection
 EndGlobal

@@ -117,7 +117,7 @@ namespace Saturn72.Core.Configuration
         }
 
         /// <summary>
-        ///     Load settings
+        ///     LoadToAppDomain settings
         /// </summary>
         /// <param name="filePath">File path; pass null to use default settings file path</param>
         /// <returns></returns>

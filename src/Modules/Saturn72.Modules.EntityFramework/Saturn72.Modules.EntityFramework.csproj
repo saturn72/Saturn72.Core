@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Saturn72.Modules.EntityFramework</RootNamespace>
     <AssemblyName>Saturn72.Modules.EntityFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <WebGreaseLibPath>..\..\Saturn72.Web\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>

@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\XmlConfigManagerTests.cs" />
+    <Compile Include="Infrastructure\AppDomainLoaderTests.cs" />
     <Compile Include="Saturn72ExceptionTests.cs" />
     <Compile Include="CommonHelperTests.cs" />
     <Compile Include="Fakes\FakeTypeFinder.cs" />
@@ -99,6 +100,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\RootConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Modules\AssemblyToLoad.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

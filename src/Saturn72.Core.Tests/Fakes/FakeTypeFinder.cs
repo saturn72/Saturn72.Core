@@ -97,5 +97,10 @@ namespace Saturn72.Core.Tests.Fakes
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Assembly> FindAssembliesWithTypeDerivatives<TType>()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

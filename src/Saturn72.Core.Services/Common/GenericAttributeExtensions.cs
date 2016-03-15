@@ -14,7 +14,7 @@ namespace Saturn72.Core.Services.Common
         /// <typeparam name="TPropType">Property type</typeparam>
         /// <param name="entity">Entity</param>
         /// <param name="key">Key</param>
-        /// <param name="portalId">Load a value specific for a certain store; pass 0 to load a value shared for all stores</param>
+        /// <param name="portalId">LoadToAppDomain a value specific for a certain store; pass 0 to load a value shared for all stores</param>
         /// <returns>Attribute</returns>
         public static TPropType GetAttribute<TPropType>(this BaseEntity entity, string key, int portalId = 0)
         {
@@ -29,7 +29,7 @@ namespace Saturn72.Core.Services.Common
         /// <param name="entity">Entity</param>
         /// <param name="key">Key</param>
         /// <param name="genericAttributeService">GenericAttributeService</param>
-        /// <param name="portalId">Load a value specific for a certain store; pass 0 to load a value shared for all stores</param>
+        /// <param name="portalId">LoadToAppDomain a value specific for a certain store; pass 0 to load a value shared for all stores</param>
         /// <returns>Attribute</returns>
         public static TPropType GetAttribute<TPropType>(this BaseEntity entity,
             string key, IGenericAttributeService genericAttributeService, int portalId = 0)

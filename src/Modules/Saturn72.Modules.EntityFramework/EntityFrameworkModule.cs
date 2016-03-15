@@ -19,5 +19,6 @@ namespace Saturn72.Modules.EntityFramework
         }
 
         public int StartupOrder => -1000;
+        public int StopOrder => 1000;
     }
 }

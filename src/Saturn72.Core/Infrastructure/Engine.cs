@@ -86,7 +86,7 @@ namespace Saturn72.Core.Infrastructure
 
             //register dependencies provided by other assemblies
             builder = new ContainerBuilder();
-            typeFinder.FindTypeAndRunMethod<IDependencyRegistrar>(dr => dr.Register(builder, typeFinder), dr => dr.Order);
+            typeFinder.FindClassesOfTypeAndRunMethod<IDependencyRegistrar>(dr => dr.Register(builder, typeFinder), dr => dr.Order);
             builder.Update(container);
             ContainerManager = new ContainerManager(container);
 
@@ -106,7 +106,7 @@ namespace Saturn72.Core.Infrastructure
         /// <param name="typeFinder">TypeFinder <see cref="ITypeFinder"/></param>
         protected virtual void RunStartupTasks(ITypeFinder typeFinder)
         {
-            typeFinder.FindTypeAndRunMethod<IStartupTask>(s => s.Execute(), s => s.Order);
+            typeFinder.FindClassesOfTypeAndRunMethod<IStartupTask>(s => s.Execute(), s => s.Order);
         }
 
         #endregion Utilities

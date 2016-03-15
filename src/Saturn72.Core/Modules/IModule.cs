@@ -21,5 +21,10 @@
         /// Module startup order
         /// </summary>
         int StartupOrder { get;  }
+
+        /// <summary>
+        /// MOdule's stop order
+        /// </summary>
+        int StopOrder { get; }
     }
 }

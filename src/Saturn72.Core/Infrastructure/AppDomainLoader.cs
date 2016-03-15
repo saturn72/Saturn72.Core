@@ -25,7 +25,7 @@ namespace Saturn72.Core.Infrastructure
         ///     Loads all components to AppDomain
         /// </summary>
         /// <param name="data">AppDomainLoadData <see cref="AppDomainLoadData" /></param>
-        public static void Load(AppDomainLoadData data)
+        public static void LoadToAppDomain(AppDomainLoadData data)
         {
             var componentDirectories = new[] {data.PluginsParentDirecotry, data.ModulesParentDirecotry};
 
@@ -105,6 +105,7 @@ namespace Saturn72.Core.Infrastructure
                         Debug.WriteLine("Error deleting file " + f + ". Exception: " + exc);
                     }
                 }
+                Thread.Sleep(500);
                 IoUtil.DeleteDirectory(_shadowCopyDirectory);
             }
         }
@@ -145,7 +146,7 @@ namespace Saturn72.Core.Infrastructure
         /// </summary>
         /// <param name="component">Plugin file info</param>
         /// <returns>Assembly</returns>
-        private static Assembly PerformFileDeploy(FileInfo component)
+        private static void PerformFileDeploy(FileInfo component)
         {
             VerifyNotNullComponent(component);
             var shadowCopiedPluginPath = GetDeploymentPathInfo(component);
@@ -158,7 +159,7 @@ namespace Saturn72.Core.Infrastructure
             if (CommonHelper.IsWebApp())
                 BuildManager.AddReferencedAssembly(shadowCopiedAssembly);
 
-            return shadowCopiedAssembly;
+            return;
         }
 
         private static void VerifyNotNullComponent(FileInfo componentFileInfo)

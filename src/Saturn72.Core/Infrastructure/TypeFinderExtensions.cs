@@ -12,9 +12,9 @@ namespace Saturn72.Core.Infrastructure
         /// <typeparam name="TService">The Service</typeparam>
         /// <param name="typeFinder">Type finder <see cref="ITypeFinder"/></param>
         /// <param name="action">Action to run on type</param>
-        public static void FindTypeAndRunMethod<TService>(this ITypeFinder typeFinder,Action<TService> action)
+        public static void FindClassesOfTypeAndRunMethod<TService>(this ITypeFinder typeFinder,Action<TService> action)
         {
-            FindTypeAndRunMethod(typeFinder, action, null);
+            FindClassesOfTypeAndRunMethod(typeFinder, action, null);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Saturn72.Core.Infrastructure
         /// <param name="typeFinder">Type finder <see cref="ITypeFinder"/></param>
         /// <param name="action">Action to run on type</param>
         /// <param name="orderedBy">Execution order</param>
-        public static void FindTypeAndRunMethod<TService>(this ITypeFinder typeFinder, Action<TService> action, Func<TService, int> orderedBy)
+        public static void FindClassesOfTypeAndRunMethod<TService>(this ITypeFinder typeFinder, Action<TService> action, Func<TService, int> orderedBy)
         {
             var allSeriveInstances = typeFinder.FindClassesOfType<TService>();
 

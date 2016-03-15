@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Saturn72.Core;
 using Saturn72.Core.Configuration;
 using Saturn72.Core.Infrastructure;
 using Saturn72.Core.Modules;
@@ -13,7 +12,7 @@ namespace Saturn72.App.Common
         /// <summary>
         ///     Starts the application
         /// </summary>
-        public void Start()
+        public virtual void Start()
         {
             var terminate = false;
 

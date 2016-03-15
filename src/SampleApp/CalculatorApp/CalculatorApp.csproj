@@ -65,13 +65,9 @@
       <Project>{ADB0A133-EAD7-46EC-9472-B6247296BD26}</Project>
       <Name>Saturn72.App.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Saturn72.Core.Web\Saturn72.Core.Web.csproj">
+    <ProjectReference Include="..\..\Core\Saturn72.Core.Web\Saturn72.Core.Web.csproj">
       <Project>{217B8F69-CA31-4DBA-B719-912439C08EA4}</Project>
       <Name>Saturn72.Core.Web</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Saturn72.Core\Saturn72.Core.csproj">
-      <Project>{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}</Project>
-      <Name>Saturn72.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

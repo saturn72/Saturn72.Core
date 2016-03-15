@@ -4,7 +4,7 @@ using Saturn72.Core.Data;
 using Saturn72.Core.Domain.Common;
 using Saturn72.Core.Domain.Logging;
 using Saturn72.Core.Services.Logging;
-using Saturn72.Extensions.UnitTesting;
+using Saturn72.Extensions.TestSdk;
 using Xunit;
 
 namespace Saturn72.Core.Services.Tests.Logging

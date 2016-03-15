@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Saturn72.Modules.EntityFramework</RootNamespace>
     <AssemblyName>Saturn72.Modules.EntityFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <WebGreaseLibPath>..\..\Saturn72.Web\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
@@ -70,7 +70,7 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -81,6 +81,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Saturn72.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Saturn72.Extensions.1.0.0-CI00018\lib\net45\Saturn72.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -116,10 +120,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\submodules\Saturn72.Extensions\Saturn72.Extensions\Saturn72.Extensions.csproj">
-      <Project>{773F4467-A469-4196-A9B3-76A6C889C3ED}</Project>
-      <Name>Saturn72.Extensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Saturn72.Core\Saturn72.Core.csproj">
       <Project>{C44EB924-2BA3-46ED-90BD-3D6FD25EAFD4}</Project>
       <Name>Saturn72.Core</Name>

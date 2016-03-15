@@ -1,5 +1,0 @@
-﻿Author: Saturn72 Technologies team
-FriendlyName: Owin module
-FileName: Saturn72.Modules.Owin.dll
-SupportedVersions: 1.00
-SystemName: Saturn72.Modules.Owin

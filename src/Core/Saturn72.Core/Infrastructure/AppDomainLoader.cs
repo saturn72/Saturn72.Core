@@ -102,7 +102,7 @@ namespace Saturn72.Core.Infrastructure
                         Debug.WriteLine("Error deleting file " + f + ". Exception: " + exc);
                     }
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(150);
                 IoUtil.DeleteDirectory(shadowCopyDirectory);
             }
         }

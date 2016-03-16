@@ -19,7 +19,6 @@ namespace Saturn72.Core.Infrastructure
     public class AppDomainLoader
     {
         private static readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim();
-        private static string _shadowCopyDirectory;
 
         /// <summary>
         ///     Loads all components to AppDomain
@@ -27,24 +26,22 @@ namespace Saturn72.Core.Infrastructure
         /// <param name="data">AppDomainLoadData <see cref="AppDomainLoadData" /></param>
         public static void LoadToAppDomain(AppDomainLoadData data)
         {
-            var componentDirectories = new[] {data.PluginsParentDirecotry, data.ModulesParentDirecotry};
+            var componentDirectories = new[] {data.PluginsDynamicLoadingData, data.ModulesDynamicLoadingData};
 
             foreach (var componentDir in componentDirectories)
             {
                 using (new WriteLockDisposable(Locker))
                 {
-                    _shadowCopyDirectory = Path.GetFullPath(componentDir + @"\bin");
-                    var binFiles = Directory.Exists(_shadowCopyDirectory)
-                        ? Directory.GetFiles(_shadowCopyDirectory)
+                    var shadowCopyDirectory = componentDir.ShadowCopyDirectory;
+                    var binFiles = Directory.Exists(shadowCopyDirectory)
+                        ? Directory.GetFiles(shadowCopyDirectory)
                         : new string[] {};
 
-                    DeleteShadowDirectoryIfRequired(data, binFiles);
+                    DeleteShadowDirectoryIfRequired(data.DeleteShadowDirectoryOnStartup, shadowCopyDirectory, binFiles);
 
-                    IoUtil.CreateDirectoryIfNotExists(_shadowCopyDirectory);
+                    IoUtil.CreateDirectoryIfNotExists(shadowCopyDirectory);
 
-                    var cDirAbsolutePath = componentDir.Contains(":")
-                        ? componentDir
-                        : Path.GetFullPath(componentDir);
+                    var cDirAbsolutePath = componentDir.RootDirectory;
                     Guard.NotEmpty(cDirAbsolutePath);
 
                     try
@@ -60,7 +57,7 @@ namespace Saturn72.Core.Infrastructure
                             .Where(x => !IsAlreadyLoaded(x)))
                         {
                             Guard.NotEmpty(dlf);
-                            PerformFileDeploy(new FileInfo(dlf));
+                            PerformFileDeploy(new FileInfo(dlf), shadowCopyDirectory);
                         }
                     }
                     catch (ReflectionTypeLoadException ex)
@@ -89,9 +86,9 @@ namespace Saturn72.Core.Infrastructure
             }
         }
 
-        private static void DeleteShadowDirectoryIfRequired(AppDomainLoadData data, string[] binFiles)
+        private static void DeleteShadowDirectoryIfRequired(bool shouldDeleteShadowCopyDirectories, string shadowCopyDirectory, string[] binFiles)
         {
-            if (data.DeleteShadowDirectoryOnStartup && Directory.Exists(_shadowCopyDirectory))
+            if (shouldDeleteShadowCopyDirectories && Directory.Exists(shadowCopyDirectory))
             {
                 foreach (var f in binFiles)
                 {
@@ -105,8 +102,8 @@ namespace Saturn72.Core.Infrastructure
                         Debug.WriteLine("Error deleting file " + f + ". Exception: " + exc);
                     }
                 }
-                Thread.Sleep(500);
-                IoUtil.DeleteDirectory(_shadowCopyDirectory);
+                Thread.Sleep(100);
+                IoUtil.DeleteDirectory(shadowCopyDirectory);
             }
         }
 
@@ -145,11 +142,12 @@ namespace Saturn72.Core.Infrastructure
         ///     Perform file deply
         /// </summary>
         /// <param name="component">Plugin file info</param>
+        /// <param name="shadowCopyDirectory"></param>
         /// <returns>Assembly</returns>
-        private static void PerformFileDeploy(FileInfo component)
+        private static void PerformFileDeploy(FileInfo component, string shadowCopyDirectory)
         {
             VerifyNotNullComponent(component);
-            var shadowCopiedPluginPath = GetDeploymentPathInfo(component);
+            var shadowCopiedPluginPath = GetDeploymentPathInfo(component, shadowCopyDirectory);
             //we can now register the plugin definition
             var shadowCopiedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(shadowCopiedPluginPath.FullName));
 
@@ -158,8 +156,6 @@ namespace Saturn72.Core.Infrastructure
 
             if (CommonHelper.IsWebApp())
                 BuildManager.AddReferencedAssembly(shadowCopiedAssembly);
-
-            return;
         }
 
         private static void VerifyNotNullComponent(FileInfo componentFileInfo)
@@ -174,7 +170,7 @@ namespace Saturn72.Core.Infrastructure
             });
         }
 
-        private static FileInfo GetDeploymentPathInfo(FileInfo plugin)
+        private static FileInfo GetDeploymentPathInfo(FileInfo plugin, string shadowCopyDirectory)
         {
             if (CommonHelper.IsWebApp() && NetCommonHelper.GetTrustLevel() == AspNetHostingPermissionLevel.Unrestricted)
             {
@@ -185,7 +181,7 @@ namespace Saturn72.Core.Infrastructure
                 return GetFullTrustDeploymentPath(plugin, new DirectoryInfo(directory));
             }
 
-            return GetMediumTrustDeploymentPath(plugin, _shadowCopyDirectory);
+            return GetMediumTrustDeploymentPath(plugin, shadowCopyDirectory);
         }
 
         private static FileInfo GetMediumTrustDeploymentPath(FileSystemInfo component, string shadowCopyDirPath)

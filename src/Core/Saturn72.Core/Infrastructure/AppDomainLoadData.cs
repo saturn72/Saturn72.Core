@@ -14,12 +14,20 @@ namespace Saturn72.Core.Infrastructure
         {
         }
 
-        public AppDomainLoadData( bool deleteShadowDirectoryOnStartup, string pluginsParentDirectory,
+        public AppDomainLoadData(bool deleteShadowDirectoryOnStartup, string pluginsParentDirectory,
             string modulesParentDirectory)
+            : this(deleteShadowDirectoryOnStartup,
+                new DynamicLoadingData(pluginsParentDirectory, pluginsParentDirectory + @"\bin"),
+                new DynamicLoadingData(modulesParentDirectory, modulesParentDirectory + @"\bin"))
+        {
+        }
+
+        public AppDomainLoadData(bool deleteShadowDirectoryOnStartup, DynamicLoadingData pluginsDynamicLoadData,
+            DynamicLoadingData modulesDynamicLoadData)
         {
             DeleteShadowDirectoryOnStartup = deleteShadowDirectoryOnStartup;
-            ModulesParentDirecotry = modulesParentDirectory;
-            PluginsParentDirecotry = pluginsParentDirectory;
+            ModulesDynamicLoadingData = modulesDynamicLoadData;
+            PluginsDynamicLoadingData = pluginsDynamicLoadData;
         }
 
         #endregion
@@ -27,14 +35,14 @@ namespace Saturn72.Core.Infrastructure
         #region Properties
 
         /// <summary>
-        ///     Gets the root folder of all plugins
+        ///     Gets the dynamic download data for plugins <see cref="DynamicLoadingData" />
         /// </summary>
-        public string PluginsParentDirecotry { get; }
+        public DynamicLoadingData PluginsDynamicLoadingData { get; }
 
         /// <summary>
-        ///     Gets the root folder of all modules
+        ///     Gets the dynamic download data for modules <see cref="DynamicLoadingData" />
         /// </summary>
-        public string ModulesParentDirecotry { get; }
+        public DynamicLoadingData ModulesDynamicLoadingData { get; }
 
         /// <summary>
         ///     Get value indicating if the shadow copy folder should be deleted on startup

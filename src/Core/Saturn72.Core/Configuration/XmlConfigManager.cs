@@ -40,10 +40,18 @@ namespace Saturn72.Core.Configuration
             var deleteShadowOnStartup = mde.Attribute("DeleteShadowDirectoryOnStartup")?.Value.ToBoolean() ?? true;
             var moduleDirectory = configRoot.XPathSelectElement("appdomain/modules")?.Attribute("Directory")?.Value ??
                                   "Modules";
+            var moduleShadowCopyDirectory =
+                configRoot.XPathSelectElement("appdomain/modules")?.Attribute("ShadowCopyDirectory")?.Value ??
+                @"Modules\bin";
             var pluginsDirectory = configRoot.XPathSelectElement("appdomain/plugins")?.Attribute("Directory")?.Value ??
                                    "Plugins";
+            var pluginsShadowCopyDirectory =
+                configRoot.XPathSelectElement("appdomain/plugins")?.Attribute("ShadowCopyDirectory")?.Value ??
+                @"Plugins\bin";
 
-            AppDomainLoadData = new AppDomainLoadData(deleteShadowOnStartup, pluginsDirectory, moduleDirectory);
+            AppDomainLoadData = new AppDomainLoadData(deleteShadowOnStartup,
+                new DynamicLoadingData(pluginsDirectory, pluginsShadowCopyDirectory),
+                new DynamicLoadingData(moduleDirectory, moduleShadowCopyDirectory));
         }
 
         private void LoadModules(XNode configRoot)
@@ -53,10 +61,10 @@ namespace Saturn72.Core.Configuration
             elements.ForEachItem(m =>
             {
                 var type = m.Attribute("Type").Value;
-                var active = m.Attribute("Active")?.Value.ToBoolean()??true;
+                var active = m.Attribute("Active")?.Value.ToBoolean() ?? true;
                 var description = m.Attribute("Description")?.Value ?? string.Empty;
-                var name = m.Attribute("Name")?.Value?? type;
-                _modules.Add(new Module(type, active, description,name));
+                var name = m.Attribute("Name")?.Value ?? type;
+                _modules.Add(new Module(type, active, description, name));
             });
         }
 

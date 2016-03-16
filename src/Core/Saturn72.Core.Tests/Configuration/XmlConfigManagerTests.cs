@@ -16,8 +16,10 @@ namespace Saturn72.Core.Tests.Configuration
             xmlConfig.Load(configPath);
 
             Assert.Equal(true, xmlConfig.AppDomainLoadData.DeleteShadowDirectoryOnStartup);
-            Assert.Equal("Modules", xmlConfig.AppDomainLoadData.ModulesParentDirecotry);
-            Assert.Equal("Plugins", xmlConfig.AppDomainLoadData.PluginsParentDirecotry);
+            Assert.Equal("Modules", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.RootDirectory);
+            Assert.Equal(@"Modules\bin", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.ShadowCopyDirectory);
+            Assert.Equal("Plugins", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.RootDirectory);
+            Assert.Equal(@"Plugins\bin", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.ShadowCopyDirectory);
 
             var expectedModules = new[]
             {
@@ -43,8 +45,11 @@ namespace Saturn72.Core.Tests.Configuration
             xmlConfig.Load(configPath);
 
             Assert.Equal(true, xmlConfig.AppDomainLoadData.DeleteShadowDirectoryOnStartup);
-            Assert.Equal("Modules", xmlConfig.AppDomainLoadData.ModulesParentDirecotry);
-            Assert.Equal("Plugins", xmlConfig.AppDomainLoadData.PluginsParentDirecotry);
+            Assert.Equal("Modules", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.RootDirectory);
+            Assert.Equal(@"Modules\bin", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.ShadowCopyDirectory);
+            Assert.Equal("Plugins", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.RootDirectory);
+            Assert.Equal(@"Plugins\bin", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.ShadowCopyDirectory);
+
         }
 
         [Fact]

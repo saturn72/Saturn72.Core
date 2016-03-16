@@ -139,6 +139,7 @@
     <Compile Include="Domain\Localization\LocaleStringResource.cs" />
     <Compile Include="Domain\Localization\LocalizationSettings.cs" />
     <Compile Include="ICreateableEntity.cs" />
+    <Compile Include="Infrastructure\DynamicLoadingData.cs" />
     <Compile Include="Infrastructure\Resolver.cs" />
     <Compile Include="IUpdateableEntity.cs" />
     <Compile Include="Domain\Sites\Portal.cs" />

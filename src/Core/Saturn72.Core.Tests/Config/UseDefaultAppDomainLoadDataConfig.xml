@@ -4,8 +4,8 @@
   <appdomain>
   </appdomain>
   <modules>
-    <module Name="name1" Type="Saturn72.Modules.Data.EntityFrameworkRepository, AssemblyName" Active="true"
+    <module Name="name1" Type="Saturn72.ModuleInstances.Data.EntityFrameworkRepository, AssemblyName" Active="true"
             Description="Module description" />
-    <module Name="name2" Type="Saturn72.Modules.WebApi.RestfulServer, AssemblyName" Active="false" Description="Module description" />
+    <module Name="name2" Type="Saturn72.ModuleInstances.WebApi.RestfulServer, AssemblyName" Active="false" Description="Module description" />
   </modules>
 </config>

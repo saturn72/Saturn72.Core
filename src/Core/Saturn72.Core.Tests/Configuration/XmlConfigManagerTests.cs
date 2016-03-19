@@ -16,24 +16,22 @@ namespace Saturn72.Core.Tests.Configuration
             xmlConfig.Load(configPath);
 
             Assert.Equal(true, xmlConfig.AppDomainLoadData.DeleteShadowDirectoryOnStartup);
-            Assert.Equal("Modules", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.RootDirectory);
-            Assert.Equal(@"Modules\bin", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.ShadowCopyDirectory);
+            Assert.Equal("ModuleInstances", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.RootDirectory);
+            Assert.Equal(@"ModuleInstances\bin", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.ShadowCopyDirectory);
             Assert.Equal("Plugins", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.RootDirectory);
             Assert.Equal(@"Plugins\bin", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.ShadowCopyDirectory);
 
             var expectedModules = new[]
             {
-                new Module("Saturn72.Modules.Data.EntityFrameworkRepository, AssemblyName", true, "Module description", "name1"),
-                new Module("Saturn72.Modules.WebApi.RestfulServer, AssemblyName", false, "Module description", "name2")
+                new ModuleInstance("Saturn72.ModuleInstances.Data.EntityFrameworkRepository, AssemblyName", true),
+                new ModuleInstance("Saturn72.ModuleInstances.WebApi.RestfulServer, AssemblyName", false)
             };
-            Assert.Equal(expectedModules.Length, xmlConfig.Modules.Count());
+            Assert.Equal(expectedModules.Length, xmlConfig.ModuleInstances.Count());
 
             for (var i = 0; i < expectedModules.Length; i++)
             {
-                Assert.Equal(expectedModules[i].Active, xmlConfig.Modules.ElementAt(i).Active);
-                Assert.Equal(expectedModules[i].Description, xmlConfig.Modules.ElementAt(i).Description);
-                Assert.Equal(expectedModules[i].Type, xmlConfig.Modules.ElementAt(i).Type);
-                Assert.Equal(expectedModules[i].Name, xmlConfig.Modules.ElementAt(i).Name);
+                Assert.Equal(expectedModules[i].Active, xmlConfig.ModuleInstances.ElementAt(i).Active);
+                Assert.Equal(expectedModules[i].Type, xmlConfig.ModuleInstances.ElementAt(i).Type);
             }
         }
 
@@ -45,8 +43,8 @@ namespace Saturn72.Core.Tests.Configuration
             xmlConfig.Load(configPath);
 
             Assert.Equal(true, xmlConfig.AppDomainLoadData.DeleteShadowDirectoryOnStartup);
-            Assert.Equal("Modules", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.RootDirectory);
-            Assert.Equal(@"Modules\bin", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.ShadowCopyDirectory);
+            Assert.Equal("ModuleInstances", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.RootDirectory);
+            Assert.Equal(@"ModuleInstances\bin", xmlConfig.AppDomainLoadData.ModulesDynamicLoadingData.ShadowCopyDirectory);
             Assert.Equal("Plugins", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.RootDirectory);
             Assert.Equal(@"Plugins\bin", xmlConfig.AppDomainLoadData.PluginsDynamicLoadingData.ShadowCopyDirectory);
 

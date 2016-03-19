@@ -9,7 +9,7 @@ namespace Saturn72.Core.Configuration
         /// <summary>
         ///     Gets system modules
         /// </summary>
-        IEnumerable<Module> Modules { get; }
+        IEnumerable<ModuleInstance> ModuleInstances { get; }
 
         /// <summary>
         ///     Gets app domain load data <see cref="AppDomainLoadData"/>

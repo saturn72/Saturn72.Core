@@ -5,6 +5,6 @@
   </appdomain>
   <modules>
     <module />
-    <module Name="name2" Type="Saturn72.Modules.WebApi.RestfulServer, AssemblyName" Active="false" Description="Module description" />
+    <module Name="name2" Type="Saturn72.ModuleInstances.WebApi.RestfulServer, AssemblyName" Active="false" Description="Module description" />
   </modules>
 </config>

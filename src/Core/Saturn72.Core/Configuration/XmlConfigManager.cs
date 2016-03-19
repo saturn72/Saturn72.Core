@@ -11,7 +11,7 @@ namespace Saturn72.Core.Configuration
 {
     public class XmlConfigManager : IConfigManager
     {
-        private IList<Module> _modules;
+        private IList<ModuleInstance> _moduleInstancesInstances;
 
         /// <summary>
         ///     Loads all config nodes
@@ -39,10 +39,10 @@ namespace Saturn72.Core.Configuration
             var mde = configRoot.XPathSelectElement("appdomain");
             var deleteShadowOnStartup = mde.Attribute("DeleteShadowDirectoryOnStartup")?.Value.ToBoolean() ?? true;
             var moduleDirectory = configRoot.XPathSelectElement("appdomain/modules")?.Attribute("Directory")?.Value ??
-                                  "Modules";
+                                  "ModuleInstances";
             var moduleShadowCopyDirectory =
                 configRoot.XPathSelectElement("appdomain/modules")?.Attribute("ShadowCopyDirectory")?.Value ??
-                @"Modules\bin";
+                @"ModuleInstances\bin";
             var pluginsDirectory = configRoot.XPathSelectElement("appdomain/plugins")?.Attribute("Directory")?.Value ??
                                    "Plugins";
             var pluginsShadowCopyDirectory =
@@ -57,14 +57,12 @@ namespace Saturn72.Core.Configuration
         private void LoadModules(XNode configRoot)
         {
             var elements = configRoot.XPathSelectElements("modules/module");
-            _modules = new List<Module>(elements.Count());
+            _moduleInstancesInstances = new List<ModuleInstance>(elements.Count());
             elements.ForEachItem(m =>
             {
                 var type = m.Attribute("Type").Value;
                 var active = m.Attribute("Active")?.Value.ToBoolean() ?? true;
-                var description = m.Attribute("Description")?.Value ?? string.Empty;
-                var name = m.Attribute("Name")?.Value ?? type;
-                _modules.Add(new Module(type, active, description, name));
+                _moduleInstancesInstances.Add(new ModuleInstance(type, active));
             });
         }
 
@@ -72,7 +70,7 @@ namespace Saturn72.Core.Configuration
 
         #region Properties
 
-        public IEnumerable<Module> Modules => _modules;
+        public IEnumerable<ModuleInstance> ModuleInstances => _moduleInstancesInstances;
 
         public AppDomainLoadData AppDomainLoadData { get; private set; }
 

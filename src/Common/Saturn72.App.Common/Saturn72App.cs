@@ -18,8 +18,11 @@ namespace Saturn72.App.Common
 
             Console.Out.WriteLine("Start {0} application".AsFormat(_appId));
 
-            Console.Out.WriteLine("LoadToAppDomain application modules...");
-            LoadAllModules();
+            Console.Out.WriteLine("Prepare AppDomain...");
+            PrepareAppDomain();
+
+            Console.Out.WriteLine("Load appcomain modules...");
+            LoadAllAppDomainModules();
 
             Console.Out.WriteLine("Start application engine...");
             EngineContext.Initialize(true);
@@ -39,6 +42,10 @@ namespace Saturn72.App.Common
 
         }
 
+        private void PrepareAppDomain()
+        {
+            AppDomainLoader.LoadToAppDomain(_configManager.AppDomainLoadData);
+        }
 
         #region Fields
 
@@ -90,9 +97,8 @@ namespace Saturn72.App.Common
             return ch;
         }
 
-        private void LoadAllModules()
+        private void LoadAllAppDomainModules()
         {
-            AppDomainLoader.LoadToAppDomain(_configManager.AppDomainLoadData);
             var typeFinder = new AppDomainTypeFinder();
             typeFinder.FindClassesOfTypeAndRunMethod<IModule>(m=>m.Load(), m=>m.StartupOrder);
         }

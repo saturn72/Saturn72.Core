@@ -10,7 +10,7 @@ namespace Saturn72.Core.Infrastructure
         }
 
         public AppDomainLoadData(bool deleteShadowDirectoryOnStartup) :
-            this(deleteShadowDirectoryOnStartup, "Plugins", "Modules")
+            this(deleteShadowDirectoryOnStartup, "Plugins", "ModuleInstances")
         {
         }
 

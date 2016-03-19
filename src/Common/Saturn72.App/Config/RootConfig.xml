@@ -6,6 +6,7 @@
       <plugins Directory="..\..\Plugins\binaries" ShadowCopyDirectory="Plugins\bin"/>
     </appdomain>
   <modules>
-    <module Name="Entity Framework Repository" Type="Saturn72.Modules.EntityFramework.EntityFrameworkModule, Saturn72.Modules.EntityFramework" Active="true" Description="Module description"/>
+    <module Type="Saturn72.Modules.EntityFramework.EntityFrameworkModule, Saturn72.Modules.EntityFramework" Active="false" />
+    <module Type="Saturn72.Modules.Owin.OwinModule, Saturn72.Modules.Owin" Active="true" />
   </modules>
 </config>

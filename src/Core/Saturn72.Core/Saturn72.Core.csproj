@@ -156,7 +156,7 @@
     <Compile Include="IWebHelper.cs" />
     <Compile Include="IWorkContext.cs" />
     <Compile Include="Modules\IModule.cs" />
-    <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ModuleInstance.cs" />
     <Compile Include="Modules\ModuleExtensions.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Caching\CacheExtensions.cs" />

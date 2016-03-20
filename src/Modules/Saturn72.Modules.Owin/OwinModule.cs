@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Owin.Hosting;
 using Saturn72.Core.Modules;
 using Saturn72.Extensions;
@@ -20,13 +21,17 @@ namespace Saturn72.Modules.Owin
             Guard.HasValue(_baseUri);
 
             Console.WriteLine("Starting web Server...");
+            Task.Factory.StartNew(StartWebServer);
+        }
+
+        private static void StartWebServer()
+        {
             using (WebApp.Start<Startup>(_baseUri))
             {
                 Console.WriteLine("web server started. uri: " + _baseUri);
 
                 while (true)
                 {
-
                 }
             }
         }

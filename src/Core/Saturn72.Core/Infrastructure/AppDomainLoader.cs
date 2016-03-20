@@ -32,6 +32,11 @@ namespace Saturn72.Core.Infrastructure
             {
                 using (new WriteLockDisposable(Locker))
                 {
+                    var cDirAbsolutePath = componentDir.RootDirectory;
+                    Guard.NotEmpty(cDirAbsolutePath);
+                    if (!Directory.Exists(cDirAbsolutePath))
+                        continue;
+
                     var shadowCopyDirectory = componentDir.ShadowCopyDirectory;
                     var binFiles = Directory.Exists(shadowCopyDirectory)
                         ? Directory.GetFiles(shadowCopyDirectory)
@@ -41,9 +46,7 @@ namespace Saturn72.Core.Infrastructure
 
                     IoUtil.CreateDirectoryIfNotExists(shadowCopyDirectory);
 
-                    var cDirAbsolutePath = componentDir.RootDirectory;
-                    Guard.NotEmpty(cDirAbsolutePath);
-
+                  
                     try
                     {
                         var dynamicLoadedFiles =

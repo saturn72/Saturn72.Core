@@ -1,0 +1,2 @@
+﻿DataProvider: SqlServer
+DataConnectionString: Data Source=.\SqlExpress;Initial Catalog=Titan;Integrated Security=True;Persist Security Info=False

@@ -6,7 +6,8 @@
       <plugins Directory="..\..\Plugins\binaries" ShadowCopyDirectory="Plugins\bin"/>
     </appdomain>
   <modules>
-    <module Type="Saturn72.Modules.EntityFramework.EntityFrameworkModule, Saturn72.Modules.EntityFramework" Active="false" />
-    <module Type="Saturn72.Modules.Owin.OwinModule, Saturn72.Modules.Owin" Active="true" />
+    <module Type="Saturn72.Modules.EntityFramework.EntityFrameworkModule" Active="false" />
+    <module Type="Saturn72.Modules.Owin.OwinModule" Active="true" />
+    <module Type="Titan.WebApi.Module.TitanWebApiModule" Active="true" />
   </modules>
 </config>

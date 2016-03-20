@@ -59,12 +59,5 @@ namespace Saturn72.Core.Infrastructure
         /// <returns></returns>
         IEnumerable<MethodInfo> FindMethodsOfAttribute<TAttribute>(IEnumerable<Assembly> assemblies)
             where TAttribute : Attribute;
-
-        /// <summary>
-        /// Gets all assemblies in containing derivatives of base type
-        /// </summary>
-        /// <typeparam name="TType">Base type</typeparam>
-        /// <returns><see cref="IEnumerable{T}"/></returns>
-        IEnumerable<Assembly> FindAssembliesWithTypeDerivatives<TType>();
     }
 }

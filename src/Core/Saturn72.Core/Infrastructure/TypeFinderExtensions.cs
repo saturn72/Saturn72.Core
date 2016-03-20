@@ -1,11 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Saturn72.Extensions;
 
 namespace Saturn72.Core.Infrastructure
 {
     public static class TypeFinderExtensions
     {
+        /// <summary>
+        /// Gets all assemblies containing reuired type
+        /// </summary>
+        /// <typeparam name="TType">Type to scan</typeparam>
+        /// <returns><see cref="IEnumerable{T}"/></returns>
+        public static IEnumerable<Assembly> FindAssembliesWithTypeDerivatives<TType>(this ITypeFinder typeFinder)
+        {
+            var types = typeFinder.FindClassesOfType<TType>();
+
+            return types.Select(x => x.Assembly).Distinct().ToArray();
+        }
+
         /// <summary>
         /// Finds all types of TService and run action
         /// </summary>

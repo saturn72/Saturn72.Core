@@ -125,13 +125,6 @@ namespace Saturn72.Core.Infrastructure
             return SearchMethodsMatchesSearchCriteria(assemblies, m => m.GetCustomAttributes<TAttribute>(true).Any());
         }
 
-        public IEnumerable<Assembly> FindAssembliesWithTypeDerivatives<TType>()
-        {
-            var types = FindClassesOfType<TType>();
-
-            return types.Select(x => x.Assembly).Distinct().ToArray();
-        }
-
         /// <summary>Gets the assemblies related to the current implementation.</summary>
         /// <returns>A list of assemblies that should be loaded by the Nop factory.</returns>
         public virtual IList<Assembly> GetAssemblies()

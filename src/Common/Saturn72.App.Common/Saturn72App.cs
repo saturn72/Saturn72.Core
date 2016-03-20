@@ -39,7 +39,6 @@ namespace Saturn72.App.Common
 
             Console.Out.WriteLine("Stop all modules...");
             StopAllModules();
-
         }
 
         private void PrepareAppDomain()
@@ -100,7 +99,7 @@ namespace Saturn72.App.Common
         private void LoadAllAppDomainModules()
         {
             var typeFinder = new AppDomainTypeFinder();
-            typeFinder.FindClassesOfTypeAndRunMethod<IModule>(m=>m.Load(), m=>m.StartupOrder);
+            typeFinder.FindClassesOfTypeAndRunMethod<IModule>(m => m.Load(), m => m.StartupOrder);
         }
 
 
